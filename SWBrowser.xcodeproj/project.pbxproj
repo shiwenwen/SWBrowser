@@ -87,6 +87,8 @@
 		2B3D106C1C97CB7900897426 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D10691C97CB7900897426 /* XPathQuery.m */; };
 		2B3D106E1C97CBD000897426 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3D106D1C97CBD000897426 /* libxml2.2.tbd */; };
 		2B3D10741C9821A900897426 /* 学信.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B3D10731C9821A900897426 /* 学信.jpg */; };
+		2B3D10AA1C98358200897426 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D10A71C98358200897426 /* NJKWebViewProgress.m */; };
+		2B3D10AB1C98358200897426 /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D10A91C98358200897426 /* NJKWebViewProgressView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -267,6 +269,10 @@
 		2B3D10691C97CB7900897426 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		2B3D106D1C97CBD000897426 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		2B3D10731C9821A900897426 /* 学信.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "学信.jpg"; sourceTree = "<group>"; };
+		2B3D10A61C98358200897426 /* NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgress.h; sourceTree = "<group>"; };
+		2B3D10A71C98358200897426 /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgress.m; sourceTree = "<group>"; };
+		2B3D10A81C98358200897426 /* NJKWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgressView.h; sourceTree = "<group>"; };
+		2B3D10A91C98358200897426 /* NJKWebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgressView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,7 +304,7 @@
 		2B3D0F491C97B23200897426 = {
 			isa = PBXGroup;
 			children = (
-				2B3D106D1C97CBD000897426 /* libxml2.2.tbd */,
+				2B3D10751C98351D00897426 /* FrameWorks */,
 				2B3D0F541C97B23200897426 /* SWBrowser */,
 				2B3D0F6E1C97B23300897426 /* SWBrowserTests */,
 				2B3D0F791C97B23300897426 /* SWBrowserUITests */,
@@ -382,6 +388,7 @@
 		2B3D0F991C97B3E500897426 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				2B3D10A51C98358200897426 /* NJKWebViewProgress */,
 				2B3D10631C97CB7900897426 /* Hpple */,
 				2B3D10601C97B54F00897426 /* CustomAlertView.h */,
 				2B3D10611C97B54F00897426 /* CustomAlertView.m */,
@@ -637,6 +644,25 @@
 			path = Hpple;
 			sourceTree = "<group>";
 		};
+		2B3D10751C98351D00897426 /* FrameWorks */ = {
+			isa = PBXGroup;
+			children = (
+				2B3D106D1C97CBD000897426 /* libxml2.2.tbd */,
+			);
+			name = FrameWorks;
+			sourceTree = "<group>";
+		};
+		2B3D10A51C98358200897426 /* NJKWebViewProgress */ = {
+			isa = PBXGroup;
+			children = (
+				2B3D10A61C98358200897426 /* NJKWebViewProgress.h */,
+				2B3D10A71C98358200897426 /* NJKWebViewProgress.m */,
+				2B3D10A81C98358200897426 /* NJKWebViewProgressView.h */,
+				2B3D10A91C98358200897426 /* NJKWebViewProgressView.m */,
+			);
+			path = NJKWebViewProgress;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -778,6 +804,7 @@
 				2B3D103A1C97B3F200897426 /* MJRefreshComponent.m in Sources */,
 				2B3D103B1C97B3F200897426 /* MJRefreshFooter.m in Sources */,
 				2B3D10571C97B3F200897426 /* UIImage+MultiFormat.m in Sources */,
+				2B3D10AB1C98358200897426 /* NJKWebViewProgressView.m in Sources */,
 				2B3D0F961C97B37100897426 /* ImageTools.m in Sources */,
 				2B3D10581C97B3F200897426 /* UIImage+WebP.m in Sources */,
 				2B3D10501C97B3F200897426 /* SDWebImageDecoder.m in Sources */,
@@ -796,6 +823,7 @@
 				2B3D106C1C97CB7900897426 /* XPathQuery.m in Sources */,
 				2B3D10491C97B3F200897426 /* UIScrollView+MJRefresh.m in Sources */,
 				2B3D10481C97B3F200897426 /* UIScrollView+MJExtension.m in Sources */,
+				2B3D10AA1C98358200897426 /* NJKWebViewProgress.m in Sources */,
 				2B3D10431C97B3F200897426 /* MJRefreshGifHeader.m in Sources */,
 				2B3D102F1C97B3F200897426 /* UIButton+AFNetworking.m in Sources */,
 				2B3D10511C97B3F200897426 /* SDWebImageDownloader.m in Sources */,

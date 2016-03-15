@@ -8,7 +8,13 @@
 
 #import "BrowserViewController.h"
 #import "TFHpple.h"
-@interface BrowserViewController ()<UITextFieldDelegate,UIWebViewDelegate>
+#import "NJKWebViewProgress.h"
+#import "NJKWebViewProgressView.h"
+@interface BrowserViewController ()<UITextFieldDelegate,UIWebViewDelegate,NJKWebViewProgressDelegate>{
+    
+    NJKWebViewProgressView *_progressView;
+    NJKWebViewProgress *_progressProxy;
+}
 @property (nonatomic,strong)UIWebView *webView;
 @property (nonatomic,strong)UITextField *addressField;
 @property (nonatomic,strong)UILabel *titleLabel;
@@ -20,6 +26,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _progressProxy = [[NJKWebViewProgress alloc] init];
+    _webView.delegate = _progressProxy;
+    _progressProxy.webViewProxyDelegate = self;
+    _progressProxy.progressDelegate = self;
+    _progressView = [[NJKWebViewProgressView alloc]initWithFrame:CGRectMake(0, 98, KScreenWidth, 2)];
+
     self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 100,KScreenWidth, KScreenHeight - 300 )];
     [self.view addSubview:self.webView];
     self.view.backgroundColor = [UIColor colorWithRed:0.001 green:0.734 blue:1.000 alpha:1.000];
@@ -42,7 +55,7 @@
     self.webView.multipleTouchEnabled=YES;
     
     self.webView.userInteractionEnabled=YES;
-    self.webView.delegate = self;
+    self.webView.delegate = _progressProxy;
     /*
      
      - (void)reload;
@@ -114,6 +127,7 @@
         }
         
     }
+        [self.view addSubview:_progressView];
 }
 
 
@@ -228,7 +242,9 @@
     return YES;
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    
+ 
+    self.contentView.text = @"";
+    self.imageView.hidden = YES;
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.request.URL];
@@ -325,7 +341,110 @@
     [[CustomAlertView shareCustomAlertView]showAlertViewWtihTitle:[NSString stringWithFormat:@"error:%@",error] viewController:nil];
     
 }
+#pragma mark - NJKWebViewProgressDelegate
+-(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
+{
+    [_progressView setProgress:progress animated:YES];
+    
+    self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    
+    if (progress == 0) {
+        
+        self.contentView.text = @"";
+        self.imageView.hidden = YES;
+    }else if (progress == 1){
+        NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.request.URL];
+        self.addressField.text = urlStr;
+        
+        
+        //    获取所有html:
+        NSString *lJs1 = @"document.documentElement.innerHTML";
+        //    获取网页title:
+        NSString *lJs2 = @"document.title";
+        
+        NSString *lHtml1 = [self.webView stringByEvaluatingJavaScriptFromString:lJs1];
+        NSString *lHtml2 = [self.webView stringByEvaluatingJavaScriptFromString:lJs2];
+        
+        //    NSLog(@"lHtml1 = %@\n lHtml2 =%@ ",lHtml1,lHtml2);
+        
+        self.titleLabel.text = lHtml2;
+        //    self.contentView.text = lHtml1;
+        //获取html的data数据
+        //    NSData *htmlData = [[NSData alloc]initWithContentsOfURL:self.webView.request.URL];
+        
+        NSData *htmlData = [lHtml1 dataUsingEncoding:NSUTF8StringEncoding];
+        //    NSString *htmlStr = [[NSString  alloc]initWithData:htmlData encoding:NSUTF8StringEncoding];
+        //    NSLog(@"htmlStr = %@",htmlData);
+        //即系html数据
+        TFHpple *xpathParser = [[TFHpple alloc]initWithHTMLData:htmlData];
+        //根据标签来进行过滤
+        
+        //    NSArray *allElement = [xpathParser searchWithXPathQuery:@"//*"];
+        //
+        //    for (TFHppleElement *element in allElement) {
+        //        NSLog(@"all --- %@",element.raw);
+        //    }
+        //
+        if (![urlStr hasPrefix:@"http://my.chsi.com.cn/archive/xlarchive.action"]) {
+            self.imageView.hidden = YES;
+            self.contentView.text = @"无可用数据 请进入学信档案 - 高等教育 - 学历信息";
+            
+            return;
+        }
+        NSMutableArray *tdArr = [NSMutableArray arrayWithArray:[xpathParser searchWithXPathQuery:@"//td|//td[@*]"]];
+        if (tdArr.count > 1) {
+            
+            TFHppleElement *imgElement = tdArr[1];
+            NSArray *childs = [imgElement searchWithXPathQuery:@"//img"];
+            imgElement = childs.lastObject;
+            
+            NSLog(@"image = %@",imgElement.raw);
+            
+            NSLog(@"image = %@",[imgElement objectForKey:@"src"]);
+            
+            
+            if ([imgElement objectForKey:@"src"]) {
+                NSString *photoUrl = [NSString stringWithFormat:@"http://my.chsi.com.cn%@",[imgElement objectForKey:@"src"]];
+                self.imageView.hidden = NO;
+                [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
+                
+            }else{
+                
+            }
+            
+            
+            [tdArr removeObjectAtIndex:1];
+            
+        }else{
+            self.imageView.hidden = YES;
+            self.contentView.text = @"无可用数据 请进入学信档案 - 高等教育 - 学历信息";
+            
+            return;
+        }
+        
+        
+        NSArray *thArr = [xpathParser searchWithXPathQuery:@"//th"];
+        
+        
+        NSMutableString *infoStr = [NSMutableString string];
+        //开始整理数据
+        for (int i = 0; i < tdArr.count; i++) {
+            
+            TFHppleElement *tdElement = tdArr[i];
+            TFHppleElement *ththElement = thArr[i];
+            NSLog(@"%@%@",ththElement.text,tdElement.text);
+            [infoStr appendString:[NSString stringWithFormat:@"%@%@\n",ththElement.text,tdElement.text]];
+        }
+        self.contentView.text = infoStr;
+        
+        dispatch_async(dispatch_get_global_queue(2, 0), ^{
+            [self saveLoginSession];
+        });
 
+        
+    }
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
