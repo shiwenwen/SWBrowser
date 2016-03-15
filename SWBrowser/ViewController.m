@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "BrowserViewController.h"
 @interface ViewController ()
 
 @end
@@ -16,7 +16,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+
+    
+}
+
+- (IBAction)gotoCHSI:(id)sender {
+    BrowserViewController *browser = [[BrowserViewController alloc]init];
+    browser.defaultUrl = @"http://my.chsi.com.cn/archive/xlarchive.action?trnd=73437634925636218083722806314070";
+//    browser.defaultUrl = @"http://www.cnblogs.com/YouXianMing/";
+    [self presentViewController:browser animated:YES completion:^{
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

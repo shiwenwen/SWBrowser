@@ -1,0 +1,25 @@
+//
+//  PCH.pch
+//  MCChat
+//
+//  Created by 石文文 on 16/1/15.
+//  Copyright © 2016年 shiwenwen. All rights reserved.
+//
+
+#ifndef PCH_pch
+#define PCH_pch
+
+
+#ifdef __OBJC__
+#import "UICommons.h"
+#import "UIViewExt.h"
+#import "UIView+UIViewController.h"
+#import "CustomAlertView.h"
+#import "MJRefresh.h"
+#import "UITool.h"
+#import "ImageTools.h"
+#import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
+#endif
+
+#endif /* PCH_pch */

@@ -16,7 +16,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [self updateCookie];
     return YES;
 }
 
@@ -40,6 +40,50 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+#pragma mark -- 保存cookie
+- (void)saveLoginSession{
+    
+    NSArray *allCoolkies = [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies;
+    if (allCoolkies.count > 0) {
+        
+        
+        //         NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        
+        
+        //        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:allCoolkies];
+        
+        //            NSArray *temp = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        //           BOOL result =  [fileManager createFileAtPath:kCookiePath contents:data attributes:nil];
+        //            NSLog(@"result ======== %d",result);
+        
+        [NSKeyedArchiver archiveRootObject:allCoolkies toFile:kCookiePath];
+        
+        
+    }
+    
+    
+    
+    
+}
+#pragma mark -- 取得cookie
+- (void)updateCookie{
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    //    NSArray *cookies = [NSArray arrayWithContentsOfFile:kCookiePath];
+    //    NSData *data = [NSData dataWithContentsOfFile:kCookiePath];
+    //    NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithFile:kCookiePath];
+    for (NSHTTPCookie *cookie in cookies) {
+        
+        [cookieStorage setCookie:cookie];
+        
+    }
+    
+    
+    
 }
 
 @end
