@@ -9,5 +9,6 @@
 #import "ViewController.h"
 
 @interface BrowserViewController : ViewController
-@property (nonatomic,copy)NSString *defaultUrl;
+@property (nonatomic,copy)NSString *defaultUrl;//默认打开的URL
+@property (nonatomic,copy)NSArray *allowedUrls;//允许读取数据的Url数组
 @end

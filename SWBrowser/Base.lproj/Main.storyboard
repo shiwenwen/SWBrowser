@@ -18,10 +18,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l89-FP-gCm">
-                                <rect key="frame" x="20" y="181" width="88" height="71"/>
+                                <rect key="frame" x="20" y="28" width="63" height="49"/>
                                 <state key="normal" image="学信.jpg"/>
                                 <connections>
                                     <action selector="gotoCHSI:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ffv-zf-Azw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXe-jK-ZOA">
+                                <rect key="frame" x="36" y="99" width="30" height="30"/>
+                                <state key="normal" title="百度"/>
+                                <connections>
+                                    <action selector="gotoBaidu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7yb-WY-duE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0L-pn-CGZ">
+                                <rect key="frame" x="38" y="155" width="30" height="30"/>
+                                <state key="normal" title="京东"/>
+                                <connections>
+                                    <action selector="gotoJingdong:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dIS-MC-781"/>
                                 </connections>
                             </button>
                         </subviews>

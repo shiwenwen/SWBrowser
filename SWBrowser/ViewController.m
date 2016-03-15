@@ -23,8 +23,19 @@
 
 - (IBAction)gotoCHSI:(id)sender {
     BrowserViewController *browser = [[BrowserViewController alloc]init];
-    browser.defaultUrl = @"http://my.chsi.com.cn/archive/xlarchive.action?trnd=73437634925636218083722806314070";
-//    browser.defaultUrl = @"http://www.cnblogs.com/YouXianMing/";
+    browser.defaultUrl = @"http://my.chsi.com.cn/archive/xlarchive.action";
+    browser.allowedUrls = @[@"http://order.jd.com/center/list.action",@"http://my.chsi.com.cn/archive/xlarchive.action"];
+    [self presentViewController:browser animated:YES completion:^{
+        
+    }];
+}
+- (IBAction)gotoBaidu:(id)sender {
+}
+- (IBAction)gotoJingdong:(id)sender {
+    
+    BrowserViewController *browser = [[BrowserViewController alloc]init];
+    browser.defaultUrl = @"http://order.jd.com/center/list.action";
+    browser.allowedUrls = @[@"http://order.jd.com/center/list.action",@"http://my.chsi.com.cn/archive/xlarchive.action"];
     [self presentViewController:browser animated:YES completion:^{
         
     }];
