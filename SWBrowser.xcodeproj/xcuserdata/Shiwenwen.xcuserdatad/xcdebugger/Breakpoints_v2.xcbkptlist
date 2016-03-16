@@ -4,19 +4,13 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SWBrowser/BrowserViewController.m"
-            timestampString = "479737612.66252"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
-            landmarkName = "-webViewDidFinishLoad:"
-            landmarkType = "5">
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -25,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SWBrowser/BrowserViewController.m"
-            timestampString = "479737612.66252"
+            filePath = "SWBrowser/WKWebViewViewController.m"
+            timestampString = "479812165.874945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "325"
-            endingLineNumber = "325"
-            landmarkName = "-webViewDidFinishLoad:"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
+            landmarkName = "-getJingdongList:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

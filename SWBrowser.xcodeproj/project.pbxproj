@@ -89,6 +89,10 @@
 		2B3D10741C9821A900897426 /* 学信.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B3D10731C9821A900897426 /* 学信.jpg */; };
 		2B3D10AA1C98358200897426 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D10A71C98358200897426 /* NJKWebViewProgress.m */; };
 		2B3D10AB1C98358200897426 /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D10A91C98358200897426 /* NJKWebViewProgressView.m */; };
+		2BAB55C21C990AC00052A58A /* WKWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB55C01C990AC00052A58A /* WKWebViewViewController.m */; };
+		2BAB55C31C990AC00052A58A /* WKWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BAB55C11C990AC00052A58A /* WKWebViewViewController.xib */; };
+		2BAB55C51C99138A0052A58A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB55C41C99138A0052A58A /* WebKit.framework */; };
+		2BAB55C71C992C240052A58A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB55C61C992C240052A58A /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -273,6 +277,11 @@
 		2B3D10A71C98358200897426 /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgress.m; sourceTree = "<group>"; };
 		2B3D10A81C98358200897426 /* NJKWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgressView.h; sourceTree = "<group>"; };
 		2B3D10A91C98358200897426 /* NJKWebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgressView.m; sourceTree = "<group>"; };
+		2BAB55BF1C990AC00052A58A /* WKWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewViewController.h; sourceTree = "<group>"; };
+		2BAB55C01C990AC00052A58A /* WKWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewViewController.m; sourceTree = "<group>"; };
+		2BAB55C11C990AC00052A58A /* WKWebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKWebViewViewController.xib; sourceTree = "<group>"; };
+		2BAB55C41C99138A0052A58A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		2BAB55C61C992C240052A58A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +289,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BAB55C71C992C240052A58A /* SystemConfiguration.framework in Frameworks */,
+				2BAB55C51C99138A0052A58A /* WebKit.framework in Frameworks */,
 				2B3D106E1C97CBD000897426 /* libxml2.2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +315,7 @@
 		2B3D0F491C97B23200897426 = {
 			isa = PBXGroup;
 			children = (
+				2BAB55C61C992C240052A58A /* SystemConfiguration.framework */,
 				2B3D10751C98351D00897426 /* FrameWorks */,
 				2B3D0F541C97B23200897426 /* SWBrowser */,
 				2B3D0F6E1C97B23300897426 /* SWBrowserTests */,
@@ -334,6 +346,9 @@
 				2B3D0F881C97B26600897426 /* BrowserViewController.h */,
 				2B3D0F891C97B26600897426 /* BrowserViewController.m */,
 				2B3D0F8A1C97B26600897426 /* BrowserViewController.xib */,
+				2BAB55BF1C990AC00052A58A /* WKWebViewViewController.h */,
+				2BAB55C01C990AC00052A58A /* WKWebViewViewController.m */,
+				2BAB55C11C990AC00052A58A /* WKWebViewViewController.xib */,
 				2B3D0F991C97B3E500897426 /* SDK */,
 				2B3D0F971C97B37700897426 /* Tools */,
 				2B3D0F611C97B23300897426 /* Assets.xcassets */,
@@ -647,6 +662,7 @@
 		2B3D10751C98351D00897426 /* FrameWorks */ = {
 			isa = PBXGroup;
 			children = (
+				2BAB55C41C99138A0052A58A /* WebKit.framework */,
 				2B3D106D1C97CBD000897426 /* libxml2.2.tbd */,
 			);
 			name = FrameWorks;
@@ -772,6 +788,7 @@
 				2B3D0F621C97B23300897426 /* Assets.xcassets in Resources */,
 				2B3D0F601C97B23300897426 /* Main.storyboard in Resources */,
 				2B3D10741C9821A900897426 /* 学信.jpg in Resources */,
+				2BAB55C31C990AC00052A58A /* WKWebViewViewController.xib in Resources */,
 				2B3D10371C97B3F200897426 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -838,6 +855,7 @@
 				2B3D102C1C97B3F200897426 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				2B3D10271C97B3F200897426 /* AFSecurityPolicy.m in Sources */,
 				2B3D10521C97B3F200897426 /* SDWebImageDownloaderOperation.m in Sources */,
+				2BAB55C21C990AC00052A58A /* WKWebViewViewController.m in Sources */,
 				2B3D10341C97B3F200897426 /* WPAttributedStyleAction.m in Sources */,
 				2B3D10231C97B3F200897426 /* AFHTTPRequestOperation.m in Sources */,
 				2B3D10621C97B55000897426 /* CustomAlertView.m in Sources */,
@@ -1104,6 +1122,7 @@
 				2B3D0F811C97B23300897426 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2B3D0F821C97B23300897426 /* Build configuration list for PBXNativeTarget "SWBrowserTests" */ = {
 			isa = XCConfigurationList;
@@ -1112,6 +1131,7 @@
 				2B3D0F841C97B23300897426 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2B3D0F851C97B23300897426 /* Build configuration list for PBXNativeTarget "SWBrowserUITests" */ = {
 			isa = XCConfigurationList;
@@ -1120,6 +1140,7 @@
 				2B3D0F871C97B23300897426 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

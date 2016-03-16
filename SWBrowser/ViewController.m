@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "BrowserViewController.h"
+#import "WKWebViewViewController.h"
 @interface ViewController ()
 
 @end
@@ -24,18 +25,26 @@
 - (IBAction)gotoCHSI:(id)sender {
     BrowserViewController *browser = [[BrowserViewController alloc]init];
     browser.defaultUrl = @"http://my.chsi.com.cn/archive/xlarchive.action";
-    browser.allowedUrls = @[@"http://order.jd.com/center/list.action",@"http://my.chsi.com.cn/archive/xlarchive.action"];
+    browser.allowedUrls = @[@"http://order.jd.com/center/list.action",@"http://my.chsi.com.cn/archive/xlarchive.action",@"https://www.baidu.com"];
     [self presentViewController:browser animated:YES completion:^{
         
     }];
 }
 - (IBAction)gotoBaidu:(id)sender {
+    WKWebViewViewController *browser = [[WKWebViewViewController alloc]init];
+    browser.defaultUrl = @"https://www.baidu.com";
+    browser.allowedUrls = @[@"http://order.jd.com/center/list.action",@"http://my.chsi.com.cn/archive/xlarchive.action",@"https://www.baidu.com"];
+    [self presentViewController:browser animated:YES completion:^{
+        
+    }];
+
+
 }
 - (IBAction)gotoJingdong:(id)sender {
     
     BrowserViewController *browser = [[BrowserViewController alloc]init];
     browser.defaultUrl = @"http://order.jd.com/center/list.action";
-    browser.allowedUrls = @[@"http://order.jd.com/center/list.action",@"http://my.chsi.com.cn/archive/xlarchive.action"];
+    browser.allowedUrls = @[@"http://order.jd.com/center/list.action",@"http://my.chsi.com.cn/archive/xlarchive.action",@"https://www.baidu.com"];
     [self presentViewController:browser animated:YES completion:^{
         
     }];

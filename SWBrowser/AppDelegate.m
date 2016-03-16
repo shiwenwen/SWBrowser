@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import <SystemConfiguration/CaptiveNetwork.h>
 @interface AppDelegate ()
 
 @end
@@ -16,10 +16,22 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [self fetchSSIDInfo];
     [self updateCookie];
     return YES;
 }
-
+- (id)fetchSSIDInfo {
+    NSArray *ifs = (__bridge_transfer id)CNCopySupportedInterfaces();
+    NSLog(@"Supported interfaces: %@", ifs);
+    id info = nil;
+    for (NSString *ifnam in ifs) {
+        info = (__bridge_transfer id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifnam);
+        NSLog(@"%@ => %@", ifnam, info);
+        if (info && [info count]) { break; }
+    }
+    return info;
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -46,19 +58,7 @@
     
     NSArray *allCoolkies = [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies;
     if (allCoolkies.count > 0) {
-        
-        
-        //         NSFileManager *fileManager = [NSFileManager defaultManager];
-        
-        
-        
-        //        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:allCoolkies];
-        
-        //            NSArray *temp = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        
-        //           BOOL result =  [fileManager createFileAtPath:kCookiePath contents:data attributes:nil];
-        //            NSLog(@"result ======== %d",result);
-        
+      
         [NSKeyedArchiver archiveRootObject:allCoolkies toFile:kCookiePath];
         
         
@@ -82,7 +82,7 @@
         
     }
     
-    
+    NSLog(@"cookie载入成功");
     
 }
 

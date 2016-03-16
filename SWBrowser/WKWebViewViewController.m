@@ -1,46 +1,39 @@
 //
-//  BrowserViewController.m
+//  WKWebViewViewController.m
 //  SWBrowser
 //
-//  Created by 石文文 on 16/3/15.
+//  Created by 石文文 on 16/3/16.
 //  Copyright © 2016年 shiwenwen. All rights reserved.
 //
 
-#import "BrowserViewController.h"
+#import "WKWebViewViewController.h"
+#import <WebKit/WebKit.h>
 #import "TFHpple.h"
-#import "NJKWebViewProgress.h"
-#import "NJKWebViewProgressView.h"
-@interface BrowserViewController ()<UITextFieldDelegate,UIWebViewDelegate,NJKWebViewProgressDelegate>{
-    
-    NJKWebViewProgressView *_progressView;
-    NJKWebViewProgress *_progressProxy;
-}
-@property (nonatomic,strong)UIWebView *webView;
+@interface WKWebViewViewController ()<UITextFieldDelegate,WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
+@property (nonatomic,strong)WKWebView *webView;
 @property (nonatomic,strong)UITextField *addressField;
 @property (nonatomic,strong)UILabel *titleLabel;
 @property (nonatomic,strong)UITextView *contentView;
 @property (nonatomic,strong)UIImageView *imageView;
 @end
 
-@implementation BrowserViewController
+@implementation WKWebViewViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self BrowserrUI];
 }
-
 #pragma mark - 浏览器UI
 - (void)BrowserrUI{
     
-    self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 100,KScreenWidth, KScreenHeight - 300 )];
+    self.webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 100,KScreenWidth, KScreenHeight - 300 )];
     [self.view addSubview:self.webView];
     self.view.backgroundColor = [UIColor colorWithRed:0.001 green:0.734 blue:1.000 alpha:1.000];
     NSMutableURLRequest *request ;
     if (self.defaultUrl) {
         request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:self.defaultUrl]
                                        cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
-
     }else{
         request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:@"https://www.baidu.com"]cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];//默认百度
     }
@@ -49,21 +42,11 @@
     [self.view addGestureRecognizer:tap];
     
     [self.webView loadRequest:request];
-
-    self.webView.scalesPageToFit=YES;
-    self.webView.multipleTouchEnabled=YES;
     
-    self.webView.userInteractionEnabled=YES;
-    //初始化进度
-    _progressProxy = [[NJKWebViewProgress alloc] init];
-    _progressProxy.webViewProxyDelegate = self;
-    _progressProxy.progressDelegate = self;
-    _progressView = [[NJKWebViewProgressView alloc]initWithFrame:CGRectMake(0, 98, KScreenWidth, 2)];
 
     
-    self.webView.delegate = _progressProxy;
-    
-    
+    self.webView.UIDelegate = self;
+    self.webView.navigationDelegate = self;
     /*
      
      - (void)reload;
@@ -137,7 +120,6 @@
         }
         
     }
-    [self.view addSubview:_progressView];
     
 }
 #pragma mark -- 保存cookie
@@ -145,18 +127,18 @@
     
     NSArray *allCoolkies = [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies;
     if (allCoolkies.count > 0) {
-  
+        
         [NSKeyedArchiver archiveRootObject:allCoolkies toFile:kCookiePath];
         
         
     }
-
+    
     
 }
 #pragma mark -- 取得cookie
 - (void)updateCookie{
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-
+    
     NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithFile:kCookiePath];
     for (NSHTTPCookie *cookie in cookies) {
         
@@ -173,12 +155,19 @@
     switch (tag) {
         case 0:
         {
-            [self.webView goBack];//返回
+            if ([self.webView canGoBack]) {
+                [self.webView goBack];//返回
+            }
+
         }
             break;
         case 1:
         {
-            [self.webView goForward];//前进
+            if ([self.webView canGoForward]) {
+                
+                [self.webView goForward];//前进
+            }
+
         }
             break;
         case 2:
@@ -217,8 +206,10 @@
         [urlStr insertString:@"http://" atIndex:0];
     }
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:urlStr]  cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
-
+    
     request.HTTPShouldHandleCookies = YES;
+    
+    
     [self.webView loadRequest:request];
     
     [textField resignFirstResponder];
@@ -230,127 +221,200 @@
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
-    self.addressField.text = [NSString stringWithFormat:@"%@",self.webView.request.URL];
+    self.addressField.text = [NSString stringWithFormat:@"%@",self.webView.URL];
 }
-#pragma mark -- webViewDelegate
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+
+#pragma mark -- WKNavigationDelegate
+/**
+ *  页面开始加载时调用
+ *
+ *  @param webView    实现该代理的webview
+ *  @param navigation 当前navigation
+ */
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
     
-    NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.request.URL];
+    NSLog(@"%s", __FUNCTION__);
+    //开始载入时清空内容
+    self.contentView.text = @"";
+    self.imageView.hidden = YES;
+}
+
+/**
+ *  当内容开始返回时调用
+ *
+ *  @param webView    实现该代理的webview
+ *  @param navigation 当前navigation
+ */
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
+    
+    NSLog(@"%s", __FUNCTION__);
+    NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.URL];
     self.addressField.text = urlStr;
-    return YES;
+
 }
-- (void)webViewDidStartLoad:(UIWebView *)webView{
-    NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.request.URL];
+
+/**
+ *  页面加载完成之后调用
+ *
+ *  @param webView    实现该代理的webview
+ *  @param navigation 当前navigation
+ */
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    
+    
+    dispatch_async(dispatch_get_global_queue(2, 0), ^{
+        [self saveLoginSession];
+    });
+
+    
+    NSLog(@"%s", __FUNCTION__); //网页加载完成
+    NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.URL];
     self.addressField.text = urlStr;
-}
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
-
-
+//
     
-}
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{
-    
+//    //    获取所有html:
+//    NSString *lJs1 = @"document.documentElement.innerHTML";
+//    //    获取网页title:
+//    NSString *lJs2 = @"document.title";
+//    
+         self.titleLabel.text = self.webView.title;//设置标题
+//
+    [self.webView evaluateJavaScript:@"document.documentElement.innerHTML" completionHandler:^(id _Nullable unknown, NSError * _Nullable error) {
+        
+//        NSLog(@"%@ ",unknown);
+        
+ 
+        //    NSString *lHtml2 ;
+        NSString *lHtml1 = [NSString stringWithFormat:@"%@",unknown];
+//        NSLog(@"lHtml1 = %@\n lHtml2 =%@ ",lHtml1,lHtml2);
+        //
 
-    
-}
-#pragma mark - NJKWebViewProgressDelegate
--(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
-{
-    [_progressView setProgress:progress animated:YES];
-    
-    self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    
-    if (progress == 0) {
-         //开始载入时清空内容
-        self.contentView.text = @"";
-        self.imageView.hidden = YES;
-    }else if (progress == 1){
-        /*
-        NSURL *url = self.webView.request.URL;
-        
-        NSLog(@"Scheme: %@", [url scheme]);
-        
-        NSLog(@"Host: %@", [url host]);
-        
-        NSLog(@"Port: %@", [url port]);
-        
-        NSLog(@"Path: %@", [url path]);
-        
-        NSLog(@"Relative path: %@", [url relativePath]);
-        
-        NSLog(@"Path components as array: %@", [url pathComponents]);
-        
-        NSLog(@"Parameter string: %@", [url parameterString]);
-        
-        NSLog(@"Query: %@", [url query]);
-        
-        NSLog(@"Fragment: %@", [url fragment]);
-        
-        NSLog(@"User: %@", [url user]);
-        
-        NSLog(@"Password: %@", [url password]);
-        
-        */
-        dispatch_async(dispatch_get_global_queue(2, 0), ^{
-            [self saveLoginSession];
-        });
-        
-
-  
-        //网页加载完成
-        NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.request.URL];
-        self.addressField.text = urlStr;
-        
-        
-        //    获取所有html:
-        NSString *lJs1 = @"document.documentElement.innerHTML";
-        //    获取网页title:
-        NSString *lJs2 = @"document.title";
-        
-        NSString *lHtml1 = [self.webView stringByEvaluatingJavaScriptFromString:lJs1];
-        NSString *lHtml2 = [self.webView stringByEvaluatingJavaScriptFromString:lJs2];
-        
-
-        
-        self.titleLabel.text = lHtml2;//设置标题
-
+        //
         //获取html的data数据
-        //转换成GBK编码
-        NSStringEncoding gbEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-        
-        NSData *htmlData = [lHtml1 dataUsingEncoding:gbEncoding];
-
+        //    NSData *htmlData = [[NSData alloc]initWithContentsOfURL:self.webView.request.URL];
         lHtml1 = [lHtml1 stringByReplacingOccurrencesOfString:@"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=gb2312\">"
-                                                   withString:@"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">"];
-        NSLog(@"lHtml1 = %@\n lHtml2 =%@ ",lHtml1,lHtml2);
-        htmlData = [lHtml1 dataUsingEncoding:NSUTF8StringEncoding];
+                                                    withString:@"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">"];
+        NSData *htmlData = [lHtml1 dataUsingEncoding:NSUTF8StringEncoding];
         //    NSString *htmlStr = [[NSString  alloc]initWithData:htmlData encoding:NSUTF8StringEncoding];
         //    NSLog(@"htmlStr = %@",htmlData);
         //解析html数据
         TFHpple *xpathParser = [[TFHpple alloc]initWithHTMLData:htmlData];
         //根据标签来进行过滤
         
-
+        
         if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] < 0) {
             //不是需要抓取的页面
             
             self.imageView.hidden = YES;
             self.contentView.text = @"无可用数据 请进入学信档案 - 高等教育 - 学历信息";
-//            self.contentView.text = lHtml1;//调试用
+            //            self.contentView.text = lHtml1;//调试用
             return;
         }else if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] == 0){
             
+
+            self.contentView.text = lHtml1;
             [self getJingdongList:xpathParser];
-            
         }else if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] == 1){
             
-             [self getInfoFromCHSI:xpathParser];//学信网信息抓取
+            [self getInfoFromCHSI:xpathParser];//学信网信息抓取
         }
-        
-        
-        
-        
-    }
+    }];
+
+
+}
+
+/**
+ *  加载失败时调用
+ *
+ *  @param webView    实现该代理的webview
+ *  @param navigation 当前navigation
+ *  @param error      错误
+ */
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+    
+    NSLog(@"%s", __FUNCTION__);
+}
+
+/**
+ *  接收到服务器跳转请求之后调用
+ *
+ *  @param webView      实现该代理的webview
+ *  @param navigation   当前navigation
+ */
+- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation {
+    
+    NSLog(@"%s", __FUNCTION__);
+}
+
+/**
+ *  在收到响应后，决定是否跳转
+ *
+ *  @param webView            实现该代理的webview
+ *  @param navigationResponse 当前navigation
+ *  @param decisionHandler    是否跳转block
+ */
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler {
+    
+          // 允许跳转
+        decisionHandler(WKNavigationResponsePolicyAllow);
+    
+    // 不允许跳转
+//    decisionHandler(WKNavigationResponsePolicyCancel);
+}
+
+/**
+ *  在发送请求之前，决定是否跳转
+ *
+ *  @param webView          实现该代理的webview
+ *  @param navigationAction 当前navigation
+ *  @param decisionHandler  是否调转block
+ */
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    
+    
+        // 允许跳转
+        decisionHandler(WKNavigationActionPolicyAllow);
+
+    // 不允许跳转
+//    decisionHandler(WKNavigationActionPolicyCancel);
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+#pragma mark - WKUIDelegate
+
+/**
+ *  web界面中有弹出警告框时调用
+ *
+ *  @param webView           实现该代理的webview
+ *  @param message           警告框中的内容
+ *  @param frame             主窗口
+ *  @param completionHandler 警告框消失调用
+ */
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
+    
+
+    
+    completionHandler();
+}
+
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler {
+    
+    
+}
+
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString *))completionHandler {
+    
+    
+}
+#pragma mark --  WKScriptMessageHandler,
+// 从web界面中接收到一个脚本时调用
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+    
+    NSLog(@"%@", message);
+    
+    
     
 }
 #pragma mark - 学信抓取
@@ -371,12 +435,15 @@
         
         if ([imgElement objectForKey:@"src"]) {
             
-            NSString *photoUrl = [NSString stringWithFormat:@"%@://%@%@",self.webView.request.URL.scheme,self.webView.request.URL.host,[imgElement objectForKey:@"src"]];
-            
-            self.imageView.hidden = NO;
-            [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
+            NSString *photoUrl = [NSString stringWithFormat:@"%@://%@%@",self.webView.URL.scheme,self.webView.URL.host,[imgElement objectForKey:@"src"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.imageView.hidden = NO;
+                [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
+            });
+
             
         }else{
+            
             
         }
         
@@ -405,78 +472,24 @@
     }
     self.contentView.text = infoStr;
     
-
+    
     
 }
 #pragma mark -- 京东订单
 - (void)getJingdongList:(TFHpple *)xpathParser {
     
     NSArray *tbodyElements = [xpathParser searchWithXPathQuery:@"//tbody|tbody[@*]"];
-    NSMutableString *content = [NSMutableString string];
-    for (int i = 0; i < tbodyElements.count; i++) {
-        [content appendString:@"\n---------------\n成交时间"];
-        TFHppleElement *tbodyElement = tbodyElements[i];
+    for (TFHppleElement *tbodyElement in tbodyElements) {
         
-
-        TFHppleElement *child = [tbodyElement searchWithXPathQuery:@"//span[@class='dealtime']"].firstObject;//成交时间
-
-        [content appendString:[NSString stringWithFormat:@":%@\n",child.text]];
-        
-        child = [tbodyElement searchWithXPathQuery:@"//span[@class='number']"].firstObject;//订单号：
-        
-        [content appendString:[[child.text stringByReplacingOccurrencesOfString:@"\n" withString:@""]stringByReplacingOccurrencesOfString:@" " withString:@"" ]];
-        child = [tbodyElement searchWithXPathQuery:@"//span[@class='number']/a[@name='orderIdLinks']"].firstObject;//订单号
-
-        [content appendString:[NSString stringWithFormat:@"%ld\n",(long)[child.text integerValue]]];
-        
-        NSArray *childs = [tbodyElement searchWithXPathQuery:@"//a[@class='a-link']"];
-        for (TFHppleElement *element in childs) {
-            
-            [content appendString:[NSString stringWithFormat:@"%@\n",element.text]];//商品名称
-        }
-
-        
-        child = [tbodyElement searchWithXPathQuery:@"//span[@class='order-shop']/span|//span[@class='order-shop']/a"].firstObject;
-        if (child.text) {
-            [content appendString:[NSString stringWithFormat:@"来自:%@\n",child.text]];//来自
-        }
-
-        
-        
-        child = [tbodyElement searchWithXPathQuery:@"//ul[@class='o-info']/li"].firstObject;
-        
-        if (child.text) {
-            [content appendString:[NSString stringWithFormat:@"%@\n",child.text]];//info
-        }
-        child = [tbodyElement searchWithXPathQuery:@"//div[@class='consignee tooltip']/span[@class='txt']"].firstObject;
-        if (child.text) {
-            [content appendString:[NSString stringWithFormat:@"收货人:%@\n",child.text]];//
-        }
-        child = [tbodyElement searchWithXPathQuery:@"//div[@class='amount']/span"].firstObject;
-        if (child.text) {
-            [content appendString:[NSString stringWithFormat:@"%@\n",child.text]];//支付金额
-        }
-        child = [tbodyElement searchWithXPathQuery:@"//span[@class='ftx-13']"].firstObject;
-        if (child.text) {
-            [content appendString:[NSString stringWithFormat:@"支付方式:%@\n",child.text]];//
-        }
-        child = [tbodyElement searchWithXPathQuery:@"//div[@class='prompt-01 prompt-02']/div[@class='pc']"].firstObject;
-        [content appendString:@"收货信息:"];
-        for (TFHppleElement *element in child.children) {
-            if (element.text) {
-                [content appendFormat:@"%@  ",element.text];
-            }
-
-        }
         
     }
     
-    self.contentView.text = content;
+    
     
 }
 #pragma mark - 获取可抓取页面的url字符串index
 - (NSInteger )getAllowedUrlIndexFromAllowedUrlsWithUrlString:(NSString *)urlString{
-
+    
     NSInteger index = 0;
     for (NSString *url in self.allowedUrls) {
         
@@ -490,10 +503,6 @@
     
     return -1;
     
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*
