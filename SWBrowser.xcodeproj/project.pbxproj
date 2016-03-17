@@ -89,6 +89,10 @@
 		2B3D10741C9821A900897426 /* 学信.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B3D10731C9821A900897426 /* 学信.jpg */; };
 		2B3D10AA1C98358200897426 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D10A71C98358200897426 /* NJKWebViewProgress.m */; };
 		2B3D10AB1C98358200897426 /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D10A91C98358200897426 /* NJKWebViewProgressView.m */; };
+		2B602DDF1C9A540300222C18 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B602DDE1C9A540300222C18 /* NSData+Base64.m */; };
+		2B602DE31C9A601100222C18 /* WWWebViewProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B602DE21C9A601100222C18 /* WWWebViewProtocol.m */; };
+		2B602DE51C9A946600222C18 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B602DE41C9A946600222C18 /* CoreTelephony.framework */; };
+		2B602DE71C9ABD6A00222C18 /* test.js in Resources */ = {isa = PBXBuildFile; fileRef = 2B602DE61C9ABD6A00222C18 /* test.js */; };
 		2BAB55C21C990AC00052A58A /* WKWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB55C01C990AC00052A58A /* WKWebViewViewController.m */; };
 		2BAB55C31C990AC00052A58A /* WKWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BAB55C11C990AC00052A58A /* WKWebViewViewController.xib */; };
 		2BAB55C51C99138A0052A58A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB55C41C99138A0052A58A /* WebKit.framework */; };
@@ -277,6 +281,12 @@
 		2B3D10A71C98358200897426 /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgress.m; sourceTree = "<group>"; };
 		2B3D10A81C98358200897426 /* NJKWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgressView.h; sourceTree = "<group>"; };
 		2B3D10A91C98358200897426 /* NJKWebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgressView.m; sourceTree = "<group>"; };
+		2B602DDD1C9A540200222C18 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		2B602DDE1C9A540300222C18 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		2B602DE11C9A601100222C18 /* WWWebViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWWebViewProtocol.h; sourceTree = "<group>"; };
+		2B602DE21C9A601100222C18 /* WWWebViewProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWWebViewProtocol.m; sourceTree = "<group>"; };
+		2B602DE41C9A946600222C18 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2B602DE61C9ABD6A00222C18 /* test.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
 		2BAB55BF1C990AC00052A58A /* WKWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewViewController.h; sourceTree = "<group>"; };
 		2BAB55C01C990AC00052A58A /* WKWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewViewController.m; sourceTree = "<group>"; };
 		2BAB55C11C990AC00052A58A /* WKWebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKWebViewViewController.xib; sourceTree = "<group>"; };
@@ -289,6 +299,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B602DE51C9A946600222C18 /* CoreTelephony.framework in Frameworks */,
 				2BAB55C71C992C240052A58A /* SystemConfiguration.framework in Frameworks */,
 				2BAB55C51C99138A0052A58A /* WebKit.framework in Frameworks */,
 				2B3D106E1C97CBD000897426 /* libxml2.2.tbd in Frameworks */,
@@ -315,7 +326,6 @@
 		2B3D0F491C97B23200897426 = {
 			isa = PBXGroup;
 			children = (
-				2BAB55C61C992C240052A58A /* SystemConfiguration.framework */,
 				2B3D10751C98351D00897426 /* FrameWorks */,
 				2B3D0F541C97B23200897426 /* SWBrowser */,
 				2B3D0F6E1C97B23300897426 /* SWBrowserTests */,
@@ -337,9 +347,11 @@
 		2B3D0F541C97B23200897426 /* SWBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				2B602DE01C9A5FC200222C18 /* CustomURLProtocol */,
 				2B3D10731C9821A900897426 /* 学信.jpg */,
 				2B3D0F581C97B23300897426 /* AppDelegate.h */,
 				2B3D0F591C97B23300897426 /* AppDelegate.m */,
+				2B602DE61C9ABD6A00222C18 /* test.js */,
 				2B3D0F5B1C97B23300897426 /* ViewController.h */,
 				2B3D0F5C1C97B23300897426 /* ViewController.m */,
 				2B3D0F5E1C97B23300897426 /* Main.storyboard */,
@@ -403,6 +415,8 @@
 		2B3D0F991C97B3E500897426 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				2B602DDD1C9A540200222C18 /* NSData+Base64.h */,
+				2B602DDE1C9A540300222C18 /* NSData+Base64.m */,
 				2B3D10A51C98358200897426 /* NJKWebViewProgress */,
 				2B3D10631C97CB7900897426 /* Hpple */,
 				2B3D10601C97B54F00897426 /* CustomAlertView.h */,
@@ -662,6 +676,8 @@
 		2B3D10751C98351D00897426 /* FrameWorks */ = {
 			isa = PBXGroup;
 			children = (
+				2B602DE41C9A946600222C18 /* CoreTelephony.framework */,
+				2BAB55C61C992C240052A58A /* SystemConfiguration.framework */,
 				2BAB55C41C99138A0052A58A /* WebKit.framework */,
 				2B3D106D1C97CBD000897426 /* libxml2.2.tbd */,
 			);
@@ -677,6 +693,15 @@
 				2B3D10A91C98358200897426 /* NJKWebViewProgressView.m */,
 			);
 			path = NJKWebViewProgress;
+			sourceTree = "<group>";
+		};
+		2B602DE01C9A5FC200222C18 /* CustomURLProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				2B602DE11C9A601100222C18 /* WWWebViewProtocol.h */,
+				2B602DE21C9A601100222C18 /* WWWebViewProtocol.m */,
+			);
+			name = CustomURLProtocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -782,6 +807,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B602DE71C9ABD6A00222C18 /* test.js in Resources */,
 				2B3D0F651C97B23300897426 /* LaunchScreen.storyboard in Resources */,
 				2B3D0F8C1C97B26600897426 /* BrowserViewController.xib in Resources */,
 				2B3D10461C97B3F200897426 /* MJRefresh.bundle in Resources */,
@@ -851,6 +877,7 @@
 				2B3D105F1C97B3F200897426 /* NSString+WPAttributedMarkup.m in Sources */,
 				2B3D0F941C97B37100897426 /* MBProgressHUD.m in Sources */,
 				2B3D102D1C97B3F200897426 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				2B602DE31C9A601100222C18 /* WWWebViewProtocol.m in Sources */,
 				2B3D10291C97B3F200897426 /* AFURLRequestSerialization.m in Sources */,
 				2B3D102C1C97B3F200897426 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				2B3D10271C97B3F200897426 /* AFSecurityPolicy.m in Sources */,
@@ -877,6 +904,7 @@
 				2B3D10421C97B3F200897426 /* MJRefreshBackStateFooter.m in Sources */,
 				2B3D10331C97B3F200897426 /* UIWebView+AFNetworking.m in Sources */,
 				2B3D103C1C97B3F200897426 /* MJRefreshHeader.m in Sources */,
+				2B602DDF1C9A540300222C18 /* NSData+Base64.m in Sources */,
 				2B3D105A1C97B3F200897426 /* UIImageView+WebCache.m in Sources */,
 				2B3D105C1C97B3F200897426 /* UIView+UIViewController.m in Sources */,
 				2B3D10401C97B3F200897426 /* MJRefreshBackGifFooter.m in Sources */,

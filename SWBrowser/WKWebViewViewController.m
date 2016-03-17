@@ -27,7 +27,7 @@
 #pragma mark - 浏览器UI
 - (void)BrowserrUI{
     
-    self.webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 100,KScreenWidth, KScreenHeight - 300 )];
+       self.webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 100,KScreenWidth, KScreenHeight - 300 )];
     [self.view addSubview:self.webView];
     self.view.backgroundColor = [UIColor colorWithRed:0.001 green:0.734 blue:1.000 alpha:1.000];
     NSMutableURLRequest *request ;
@@ -35,8 +35,14 @@
         request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:self.defaultUrl]
                                        cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
     }else{
-        request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:@"https://www.baidu.com"]cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];//默认百度
+        request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:@"https://www.baidu.com"]cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];//默认百度
+        
+        
+        
+        
+        
     }
+
     request.HTTPShouldHandleCookies = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenKeyBoard:)];
     [self.view addGestureRecognizer:tap];
@@ -205,7 +211,7 @@
         
         [urlStr insertString:@"http://" atIndex:0];
     }
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:urlStr]  cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:urlStr]  cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
     
     request.HTTPShouldHandleCookies = YES;
     
@@ -270,6 +276,15 @@
     NSLog(@"%s", __FUNCTION__); //网页加载完成
     NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.URL];
     self.addressField.text = urlStr;
+    
+
+    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"test" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
+    [self.webView evaluateJavaScript:js completionHandler:^(id _Nullable data, NSError * _Nullable error) {
+        NSLog(@"data = %@",data);
+        NSLog(@"error = %@",error);
+    }];
+    
+    
 //
     
 //    //    获取所有html:
@@ -298,6 +313,9 @@
         //    NSString *htmlStr = [[NSString  alloc]initWithData:htmlData encoding:NSUTF8StringEncoding];
         //    NSLog(@"htmlStr = %@",htmlData);
         //解析html数据
+        
+        
+        
         TFHpple *xpathParser = [[TFHpple alloc]initWithHTMLData:htmlData];
         //根据标签来进行过滤
         
@@ -306,13 +324,13 @@
             //不是需要抓取的页面
             
             self.imageView.hidden = YES;
-            self.contentView.text = @"无可用数据 请进入学信档案 - 高等教育 - 学历信息";
+            self.contentView.text = @"无可用数据";
             //            self.contentView.text = lHtml1;//调试用
             return;
         }else if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] == 0){
             
 
-            self.contentView.text = lHtml1;
+
             [self getJingdongList:xpathParser];
         }else if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] == 1){
             
@@ -392,20 +410,31 @@
  *  @param frame             主窗口
  *  @param completionHandler 警告框消失调用
  */
-- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
+{
+//     js 里面的alert实现，如果不实现，网页的alert函数无效
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:message
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定"
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:^(UIAlertAction *action) {
+                                                          completionHandler();
+                                                      }]];
     
+    [self presentViewController:alertController animated:YES completion:^{}];
 
-    
-    completionHandler();
 }
 
+
 - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler {
-    
+
     
 }
 
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString *))completionHandler {
     
+    completionHandler(@"Client Not handler");
     
 }
 #pragma mark --  WKScriptMessageHandler,
@@ -438,7 +467,25 @@
             NSString *photoUrl = [NSString stringWithFormat:@"%@://%@%@",self.webView.URL.scheme,self.webView.URL.host,[imgElement objectForKey:@"src"]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.imageView.hidden = NO;
-                [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
+//                [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl]
+//            placeholderImage:nil options:SDWebImageHandleCookies];
+                
+                //            [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
+                
+                //查看本地是否已经缓存了图片
+                NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:[NSURL URLWithString:photoUrl]];
+                
+                NSData *data = [[SDImageCache sharedImageCache]diskImageDataBySearchingAllPathsForKey:key];
+                
+                if (data) {
+                    self.imageView.image = [UIImage imageWithData:data];
+                }else{
+                    
+                    NSLog(@"没有缓存图片");
+                    [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
+                    
+                }
+                
             });
 
             
@@ -479,12 +526,73 @@
 - (void)getJingdongList:(TFHpple *)xpathParser {
     
     NSArray *tbodyElements = [xpathParser searchWithXPathQuery:@"//tbody|tbody[@*]"];
-    for (TFHppleElement *tbodyElement in tbodyElements) {
+    self.contentView.text = @"无可用数据 请进我的订单";
+    if (tbodyElements.count < 1) {
+        self.contentView.text = @"无订单";
         
+        return;
+    }
+    
+    NSMutableString *content = [NSMutableString string];
+    for (int i = 0; i < tbodyElements.count; i++) {
+        [content appendString:@"\n---------------\n成交时间"];
+        TFHppleElement *tbodyElement = tbodyElements[i];
+        
+        
+        TFHppleElement *child = [tbodyElement searchWithXPathQuery:@"//span[@class='dealtime']"].firstObject;//成交时间
+        
+        [content appendString:[NSString stringWithFormat:@":%@\n",child.text]];
+        
+        child = [tbodyElement searchWithXPathQuery:@"//span[@class='number']"].firstObject;//订单号：
+        
+        [content appendString:[[child.text stringByReplacingOccurrencesOfString:@"\n" withString:@""]stringByReplacingOccurrencesOfString:@" " withString:@"" ]];
+        child = [tbodyElement searchWithXPathQuery:@"//span[@class='number']/a[@name='orderIdLinks']"].firstObject;//订单号
+        
+        [content appendString:[NSString stringWithFormat:@"%ld\n",(long)[child.text integerValue]]];
+        
+        NSArray *childs = [tbodyElement searchWithXPathQuery:@"//a[@class='a-link']"];
+        for (TFHppleElement *element in childs) {
+            
+            [content appendString:[NSString stringWithFormat:@"%@\n",element.text]];//商品名称
+        }
+        
+        
+        child = [tbodyElement searchWithXPathQuery:@"//span[@class='order-shop']/span|//span[@class='order-shop']/a"].firstObject;
+        if (child.text) {
+            [content appendString:[NSString stringWithFormat:@"来自:%@\n",child.text]];//来自
+        }
+        
+        
+        
+        child = [tbodyElement searchWithXPathQuery:@"//ul[@class='o-info']/li"].firstObject;
+        
+        if (child.text) {
+            [content appendString:[NSString stringWithFormat:@"%@\n",child.text]];//info
+        }
+        child = [tbodyElement searchWithXPathQuery:@"//div[@class='consignee tooltip']/span[@class='txt']"].firstObject;
+        if (child.text) {
+            [content appendString:[NSString stringWithFormat:@"收货人:%@\n",child.text]];//
+        }
+        child = [tbodyElement searchWithXPathQuery:@"//div[@class='amount']/span"].firstObject;
+        if (child.text) {
+            [content appendString:[NSString stringWithFormat:@"%@\n",child.text]];//支付金额
+        }
+        child = [tbodyElement searchWithXPathQuery:@"//span[@class='ftx-13']"].firstObject;
+        if (child.text) {
+            [content appendString:[NSString stringWithFormat:@"支付方式:%@\n",child.text]];//
+        }
+        child = [tbodyElement searchWithXPathQuery:@"//div[@class='prompt-01 prompt-02']/div[@class='pc']"].firstObject;
+        [content appendString:@"收货信息:"];
+        for (TFHppleElement *element in child.children) {
+            if (element.text) {
+                [content appendFormat:@"%@  ",element.text];
+            }
+            
+        }
         
     }
     
-    
+    self.contentView.text = content;
     
 }
 #pragma mark - 获取可抓取页面的url字符串index

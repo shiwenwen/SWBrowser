@@ -10,6 +10,7 @@
 #import "TFHpple.h"
 #import "NJKWebViewProgress.h"
 #import "NJKWebViewProgressView.h"
+#import "NSData+Base64.h"
 @interface BrowserViewController ()<UITextFieldDelegate,UIWebViewDelegate,NJKWebViewProgressDelegate>{
     
     NJKWebViewProgressView *_progressView;
@@ -39,14 +40,15 @@
     NSMutableURLRequest *request ;
     if (self.defaultUrl) {
         request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:self.defaultUrl]
-                                       cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
+                                       cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
 
     }else{
-        request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:@"https://www.baidu.com"]cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];//默认百度
+        request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:@"https://www.baidu.com"]cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];//默认百度
     }
     request.HTTPShouldHandleCookies = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenKeyBoard:)];
     [self.view addGestureRecognizer:tap];
+    
     
     [self.webView loadRequest:request];
 
@@ -216,7 +218,7 @@
         
         [urlStr insertString:@"http://" atIndex:0];
     }
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:urlStr]  cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:urlStr]  cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
 
     request.HTTPShouldHandleCookies = YES;
     [self.webView loadRequest:request];
@@ -258,13 +260,15 @@
 {
     [_progressView setProgress:progress animated:YES];
     
-    self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+
     
     if (progress == 0) {
          //开始载入时清空内容
         self.contentView.text = @"";
         self.imageView.hidden = YES;
     }else if (progress == 1){
+        
+//        [self.webView stringByEvaluatingJavaScriptFromString:@"alert('This is a test')"];
         /*
         NSURL *url = self.webView.request.URL;
         
@@ -345,6 +349,10 @@
         }else if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] == 1){
             
              [self getInfoFromCHSI:xpathParser];//学信网信息抓取
+        }else if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] == 2){
+            
+            
+            
         }
         
         
@@ -374,7 +382,21 @@
             NSString *photoUrl = [NSString stringWithFormat:@"%@://%@%@",self.webView.request.URL.scheme,self.webView.request.URL.host,[imgElement objectForKey:@"src"]];
             
             self.imageView.hidden = NO;
-            [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
+//            [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
+            
+            //查看本地是否已经缓存了图片
+            NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:[NSURL URLWithString:photoUrl]];
+            
+            NSData *data = [[SDImageCache sharedImageCache]diskImageDataBySearchingAllPathsForKey:key];
+            
+            if (data) {
+                self.imageView.image = [UIImage imageWithData:data];
+            }else{
+                
+                NSLog(@"没有缓存图片");
+               [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
+                
+            }
             
         }else{
             
@@ -412,6 +434,13 @@
 - (void)getJingdongList:(TFHpple *)xpathParser {
     
     NSArray *tbodyElements = [xpathParser searchWithXPathQuery:@"//tbody|tbody[@*]"];
+    
+    if (tbodyElements.count < 1) {
+        self.contentView.text = @"无可用数据 请进我的订单";
+        
+        return;
+    }
+    
     NSMutableString *content = [NSMutableString string];
     for (int i = 0; i < tbodyElements.count; i++) {
         [content appendString:@"\n---------------\n成交时间"];

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
+#import "WWWebViewProtocol.h"
 @interface AppDelegate ()
 
 @end
@@ -16,7 +17,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    [NSURLProtocol registerClass:[WWWebViewProtocol class]];
     [self fetchSSIDInfo];
     [self updateCookie];
     return YES;
