@@ -279,21 +279,6 @@
     self.addressField.text = urlStr;
     
 
-    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"test" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
-//  
-    [self.webView evaluateJavaScript:js completionHandler:^(id _Nullable data, NSError * _Nullable error) {
-        NSLog(@"data = %@",data);
-        NSLog(@"error = %@",error);
-        if (data) {
-            NSString *stringData = (NSString *)data;
-            NSData *baseData = [NSData dataWithBase64EncodedString:stringData]; // this line is
-            self.imageView.hidden = NO;
-            self.imageView.image = [UIImage imageWithData:baseData];
-        }
-     
-    }];
-
-    
 
     
 //    //    获取所有html:
@@ -381,7 +366,7 @@
  *  @param decisionHandler    是否跳转block
  */
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler {
-    
+     NSLog(@"%s", __FUNCTION__);
           // 允许跳转
         decisionHandler(WKNavigationResponsePolicyAllow);
     
@@ -397,7 +382,7 @@
  *  @param decisionHandler  是否调转block
  */
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    
+     NSLog(@"%s", __FUNCTION__);
     
         // 允许跳转
         decisionHandler(WKNavigationActionPolicyAllow);
@@ -421,6 +406,7 @@
  */
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
+     NSLog(@"%s", __FUNCTION__);
 //     js 里面的alert实现，如果不实现，网页的alert函数无效
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:message
                                                                              message:nil
@@ -437,19 +423,19 @@
 
 
 - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler {
-
+ NSLog(@"%s", __FUNCTION__);
     
 }
 
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString *))completionHandler {
-    
+     NSLog(@"%s", __FUNCTION__);
     completionHandler(@"Client Not handler");
     
 }
 #pragma mark --  WKScriptMessageHandler,
 // 从web界面中接收到一个脚本时调用
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
-    
+     NSLog(@"%s", __FUNCTION__); 
     NSLog(@"%@", message);
     
     
@@ -466,43 +452,72 @@
         NSArray *childs = [imgElement searchWithXPathQuery:@"//img"];
         imgElement = childs.lastObject;
         
-        NSLog(@"image = %@",imgElement.raw);
+//        NSLog(@"image = %@",imgElement.raw);
+//        
+//        NSLog(@"image = %@",[imgElement objectForKey:@"src"]);
+//        
+//        
+//        if ([imgElement objectForKey:@"src"]) {
+//            
+//            NSString *photoUrl = [NSString stringWithFormat:@"%@://%@%@",self.webView.URL.scheme,self.webView.URL.host,[imgElement objectForKey:@"src"]];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                self.imageView.hidden = NO;
+////                [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl]
+////            placeholderImage:nil options:SDWebImageHandleCookies];
+//                
+//                //            [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
+//                
+//                //查看本地是否已经缓存了图片
+//                NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:[NSURL URLWithString:photoUrl]];
+//                
+//                NSData *data = [[SDImageCache sharedImageCache]diskImageDataBySearchingAllPathsForKey:key];
+//                
+//                if (data) {
+//                    self.imageView.image = [UIImage imageWithData:data];
+//                }else{
+//                    
+//                    NSLog(@"没有缓存图片");
+//                    [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
+//                    
+//                }
+//                
+//            });
+//
+//            
+//        }else{
+//            
+//            
+//        }
         
-        NSLog(@"image = %@",[imgElement objectForKey:@"src"]);
-        
-        
-        if ([imgElement objectForKey:@"src"]) {
-            
-            NSString *photoUrl = [NSString stringWithFormat:@"%@://%@%@",self.webView.URL.scheme,self.webView.URL.host,[imgElement objectForKey:@"src"]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.imageView.hidden = NO;
-//                [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl]
-//            placeholderImage:nil options:SDWebImageHandleCookies];
-                
-                //            [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
-                
-                //查看本地是否已经缓存了图片
-                NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:[NSURL URLWithString:photoUrl]];
-                
-                NSData *data = [[SDImageCache sharedImageCache]diskImageDataBySearchingAllPathsForKey:key];
-                
-                if (data) {
-                    self.imageView.image = [UIImage imageWithData:data];
-                }else{
-                    
-                    NSLog(@"没有缓存图片");
-                    [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
-                    
+        NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"test" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
+        [self.webView evaluateJavaScript:js completionHandler:^(id _Nullable stringData, NSError * _Nullable error) {
+            //返回的数据格式是 rrr,ggg,bbb,aaa,rrr,ggg,bbb,aaa,rrr,...  把这些数据传到CGBitmapContext里再转成CGImage
+            NSArray *byteDataArray = [stringData componentsSeparatedByString:@","];
+            if (byteDataArray) {
+                NSInteger count = byteDataArray.count;
+                if (byteDataArray.count > 2) {
+                    int width = [[byteDataArray objectAtIndex:(count - 2)] intValue];
+                    int height = [[byteDataArray objectAtIndex:(count - 1)] intValue];
+                    count -= 2;
+                    char *rawData = (char*)malloc(count);
+                    for (int i = 0; i < count; i++) {
+                        rawData[i] = [(NSString*)[byteDataArray objectAtIndex:i] intValue];
+                    }
+                    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+                    CGContextRef contextRef = CGBitmapContextCreate(rawData, width, height, 8, 4*width, colorSpace, kCGImageAlphaNoneSkipLast);
+                    CGColorSpaceRelease(colorSpace);
+                    CGImageRef cgImage = CGBitmapContextCreateImage(contextRef);
+                    CGContextRelease(contextRef);
+                    UIImage *image = [UIImage imageWithCGImage:cgImage];
+                    CGImageRelease(cgImage);
+                    free(rawData);
+                    self.imageView.image = image;
+                    self.imageView.hidden = NO;
                 }
-                
-            });
+            }
 
-            
-        }else{
-            
-            
-        }
-        
+        }];
+       
         
         [tdArr removeObjectAtIndex:1];
         
