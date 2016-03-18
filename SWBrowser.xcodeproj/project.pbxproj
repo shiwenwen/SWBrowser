@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B2EC1801C9BAEB10063C23A /* base.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EC17F1C9BAEB10063C23A /* base.txt */; };
+		2B2EC1821C9BB8530063C23A /* 网页测试.html in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EC1811C9BB8530063C23A /* 网页测试.html */; };
+		2B2EC1841C9BBA010063C23A /* bd_logo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EC1831C9BBA010063C23A /* bd_logo1.png */; };
 		2B3D0F571C97B23200897426 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D0F561C97B23200897426 /* main.m */; };
 		2B3D0F5A1C97B23300897426 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D0F591C97B23300897426 /* AppDelegate.m */; };
 		2B3D0F5D1C97B23300897426 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D0F5C1C97B23300897426 /* ViewController.m */; };
@@ -117,6 +120,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B2EC17F1C9BAEB10063C23A /* base.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = base.txt; sourceTree = "<group>"; };
+		2B2EC1811C9BB8530063C23A /* 网页测试.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "网页测试.html"; sourceTree = "<group>"; };
+		2B2EC1831C9BBA010063C23A /* bd_logo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bd_logo1.png; sourceTree = "<group>"; };
 		2B3D0F521C97B23200897426 /* SWBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B3D0F561C97B23200897426 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2B3D0F581C97B23300897426 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -349,9 +355,12 @@
 			children = (
 				2B602DE01C9A5FC200222C18 /* CustomURLProtocol */,
 				2B3D10731C9821A900897426 /* 学信.jpg */,
+				2B2EC1831C9BBA010063C23A /* bd_logo1.png */,
 				2B3D0F581C97B23300897426 /* AppDelegate.h */,
 				2B3D0F591C97B23300897426 /* AppDelegate.m */,
 				2B602DE61C9ABD6A00222C18 /* test.js */,
+				2B2EC17F1C9BAEB10063C23A /* base.txt */,
+				2B2EC1811C9BB8530063C23A /* 网页测试.html */,
 				2B3D0F5B1C97B23300897426 /* ViewController.h */,
 				2B3D0F5C1C97B23300897426 /* ViewController.m */,
 				2B3D0F5E1C97B23300897426 /* Main.storyboard */,
@@ -807,15 +816,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B2EC1821C9BB8530063C23A /* 网页测试.html in Resources */,
 				2B602DE71C9ABD6A00222C18 /* test.js in Resources */,
 				2B3D0F651C97B23300897426 /* LaunchScreen.storyboard in Resources */,
 				2B3D0F8C1C97B26600897426 /* BrowserViewController.xib in Resources */,
 				2B3D10461C97B3F200897426 /* MJRefresh.bundle in Resources */,
 				2B3D0F621C97B23300897426 /* Assets.xcassets in Resources */,
+				2B2EC1841C9BBA010063C23A /* bd_logo1.png in Resources */,
 				2B3D0F601C97B23300897426 /* Main.storyboard in Resources */,
 				2B3D10741C9821A900897426 /* 学信.jpg in Resources */,
 				2BAB55C31C990AC00052A58A /* WKWebViewViewController.xib in Resources */,
 				2B3D10371C97B3F200897426 /* LICENSE in Resources */,
+				2B2EC1801C9BAEB10063C23A /* base.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

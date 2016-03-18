@@ -52,6 +52,10 @@
     
     [self.webView loadRequest:request];
 
+//    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"网页测试" ofType:@"html"];
+//    NSString *htmlString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+//    [self.webView loadHTMLString:htmlString baseURL:[NSURL URLWithString:filePath]];
+//    
     self.webView.scalesPageToFit=YES;
     self.webView.multipleTouchEnabled=YES;
     
@@ -268,33 +272,7 @@
         self.imageView.hidden = YES;
     }else if (progress == 1){
         
-//        [self.webView stringByEvaluatingJavaScriptFromString:@"alert('This is a test')"];
-        /*
-        NSURL *url = self.webView.request.URL;
-        
-        NSLog(@"Scheme: %@", [url scheme]);
-        
-        NSLog(@"Host: %@", [url host]);
-        
-        NSLog(@"Port: %@", [url port]);
-        
-        NSLog(@"Path: %@", [url path]);
-        
-        NSLog(@"Relative path: %@", [url relativePath]);
-        
-        NSLog(@"Path components as array: %@", [url pathComponents]);
-        
-        NSLog(@"Parameter string: %@", [url parameterString]);
-        
-        NSLog(@"Query: %@", [url query]);
-        
-        NSLog(@"Fragment: %@", [url fragment]);
-        
-        NSLog(@"User: %@", [url user]);
-        
-        NSLog(@"Password: %@", [url password]);
-        
-        */
+       
         dispatch_async(dispatch_get_global_queue(2, 0), ^{
             [self saveLoginSession];
         });
@@ -376,33 +354,67 @@
         
         NSLog(@"image = %@",[imgElement objectForKey:@"src"]);
         
-        
-        if ([imgElement objectForKey:@"src"]) {
-            
-            NSString *photoUrl = [NSString stringWithFormat:@"%@://%@%@",self.webView.request.URL.scheme,self.webView.request.URL.host,[imgElement objectForKey:@"src"]];
-            
-            self.imageView.hidden = NO;
-//            [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
-            
-            //查看本地是否已经缓存了图片
-            NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:[NSURL URLWithString:photoUrl]];
-            
-            NSData *data = [[SDImageCache sharedImageCache]diskImageDataBySearchingAllPathsForKey:key];
-            
-            if (data) {
-                self.imageView.image = [UIImage imageWithData:data];
-            }else{
-                
-                NSLog(@"没有缓存图片");
-               [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
-                
+//        
+//        if ([imgElement objectForKey:@"src"]) {
+//            
+//            NSString *photoUrl = [NSString stringWithFormat:@"%@://%@%@",self.webView.request.URL.scheme,self.webView.request.URL.host,[imgElement objectForKey:@"src"]];
+//            
+//            self.imageView.hidden = NO;
+////            [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
+//            
+//            //查看本地是否已经缓存了图片
+//            NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:[NSURL URLWithString:photoUrl]];
+//            
+//            NSData *data = [[SDImageCache sharedImageCache]diskImageDataBySearchingAllPathsForKey:key];
+//            
+//            if (data) {
+//                self.imageView.image = [UIImage imageWithData:data];
+//            }else{
+//                
+//                NSLog(@"没有缓存图片");
+//               [self.imageView sd_setImageWithURL:[NSURL URLWithString:photoUrl] placeholderImage:nil options:SDWebImageHandleCookies];
+//                
+//            }
+//            
+//        }else{
+//            
+//        }
+//
+        /*
+         获取img标签，可以用各种方法，ById，ByTags，elementFromPoint等。
+         创建canvas标签，创建context，把canvas设置成和图片一样大
+         把img画到context里
+         返回canvas或context里的数据
+         
+         */
+        NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"test" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
+        NSString *stringData = [self.webView stringByEvaluatingJavaScriptFromString:js];
+        //返回的数据格式是 rrr,ggg,bbb,aaa,rrr,ggg,bbb,aaa,rrr,...  把这些数据传到CGBitmapContext里再转成CGImage
+        NSArray *byteDataArray = [stringData componentsSeparatedByString:@","];
+        if (byteDataArray) {
+            NSInteger count = byteDataArray.count;
+            if (byteDataArray.count > 2) {
+                int width = [[byteDataArray objectAtIndex:(count - 2)] intValue];
+                int height = [[byteDataArray objectAtIndex:(count - 1)] intValue];
+                count -= 2;
+                char *rawData = (char*)malloc(count);
+                for (int i = 0; i < count; i++) {
+                    rawData[i] = [(NSString*)[byteDataArray objectAtIndex:i] intValue];
+                }
+                CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+                CGContextRef contextRef = CGBitmapContextCreate(rawData, width, height, 8, 4*width, colorSpace, kCGImageAlphaNoneSkipLast);
+                CGColorSpaceRelease(colorSpace);
+                CGImageRef cgImage = CGBitmapContextCreateImage(contextRef);
+                CGContextRelease(contextRef);
+                UIImage *image = [UIImage imageWithCGImage:cgImage];
+                CGImageRelease(cgImage);
+                free(rawData);
+                self.imageView.image = image;
+                self.imageView.hidden = NO;
             }
-            
-        }else{
-            
         }
         
-        
+ 
         [tdArr removeObjectAtIndex:1];
         
     }else{
@@ -443,6 +455,11 @@
     
     NSMutableString *content = [NSMutableString string];
     for (int i = 0; i < tbodyElements.count; i++) {
+        
+        
+        
+       
+        
         [content appendString:@"\n---------------\n成交时间"];
         TFHppleElement *tbodyElement = tbodyElements[i];
         

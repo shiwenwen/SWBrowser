@@ -17,7 +17,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [NSURLProtocol registerClass:[WWWebViewProtocol class]];
+//    [NSURLProtocol registerClass:[WWWebViewProtocol class]];
+    
+    NSLog(@"%@",NSHomeDirectory());
     [self fetchSSIDInfo];
     [self updateCookie];
     return YES;

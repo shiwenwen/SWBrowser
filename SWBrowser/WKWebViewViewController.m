@@ -9,6 +9,7 @@
 #import "WKWebViewViewController.h"
 #import <WebKit/WebKit.h>
 #import "TFHpple.h"
+#import "NSData+Base64.h"
 @interface WKWebViewViewController ()<UITextFieldDelegate,WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
 @property (nonatomic,strong)WKWebView *webView;
 @property (nonatomic,strong)UITextField *addressField;
@@ -279,13 +280,21 @@
     
 
     NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"test" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
+//  
     [self.webView evaluateJavaScript:js completionHandler:^(id _Nullable data, NSError * _Nullable error) {
         NSLog(@"data = %@",data);
         NSLog(@"error = %@",error);
+        if (data) {
+            NSString *stringData = (NSString *)data;
+            NSData *baseData = [NSData dataWithBase64EncodedString:stringData]; // this line is
+            self.imageView.hidden = NO;
+            self.imageView.image = [UIImage imageWithData:baseData];
+        }
+     
     }];
+
     
-    
-//
+
     
 //    //    获取所有html:
 //    NSString *lJs1 = @"document.documentElement.innerHTML";
