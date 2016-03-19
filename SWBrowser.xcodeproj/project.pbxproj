@@ -100,6 +100,7 @@
 		2BAB55C31C990AC00052A58A /* WKWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BAB55C11C990AC00052A58A /* WKWebViewViewController.xib */; };
 		2BAB55C51C99138A0052A58A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB55C41C99138A0052A58A /* WebKit.framework */; };
 		2BAB55C71C992C240052A58A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB55C61C992C240052A58A /* SystemConfiguration.framework */; };
+		884DA71A1C9D9F170096763C /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884DA7191C9D9F170096763C /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -298,6 +299,7 @@
 		2BAB55C11C990AC00052A58A /* WKWebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKWebViewViewController.xib; sourceTree = "<group>"; };
 		2BAB55C41C99138A0052A58A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		2BAB55C61C992C240052A58A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		884DA7191C9D9F170096763C /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,6 +307,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				884DA71A1C9D9F170096763C /* JavaScriptCore.framework in Frameworks */,
 				2B602DE51C9A946600222C18 /* CoreTelephony.framework in Frameworks */,
 				2BAB55C71C992C240052A58A /* SystemConfiguration.framework in Frameworks */,
 				2BAB55C51C99138A0052A58A /* WebKit.framework in Frameworks */,
@@ -685,6 +688,7 @@
 		2B3D10751C98351D00897426 /* FrameWorks */ = {
 			isa = PBXGroup;
 			children = (
+				884DA7191C9D9F170096763C /* JavaScriptCore.framework */,
 				2B602DE41C9A946600222C18 /* CoreTelephony.framework */,
 				2BAB55C61C992C240052A58A /* SystemConfiguration.framework */,
 				2BAB55C41C99138A0052A58A /* WebKit.framework */,

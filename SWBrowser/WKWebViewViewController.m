@@ -10,6 +10,7 @@
 #import <WebKit/WebKit.h>
 #import "TFHpple.h"
 #import "NSData+Base64.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 @interface WKWebViewViewController ()<UITextFieldDelegate,WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
 @property (nonatomic,strong)WKWebView *webView;
 @property (nonatomic,strong)UITextField *addressField;
