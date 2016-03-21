@@ -29,7 +29,10 @@
 #pragma mark - 浏览器UI
 - (void)BrowserrUI{
     
-       self.webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 100,KScreenWidth, KScreenHeight - 300 )];
+    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc]init];
+    [config.userContentController addScriptMessageHandler:self name:@"webViewApp"];
+       self.webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 100,KScreenWidth, KScreenHeight - 300 ) configuration:config];
+
     [self.view addSubview:self.webView];
     self.view.backgroundColor = [UIColor colorWithRed:0.001 green:0.734 blue:1.000 alpha:1.000];
     NSMutableURLRequest *request ;
@@ -279,8 +282,14 @@
     NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.URL];
     self.addressField.text = urlStr;
     
+    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"test" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
+    
+    [self.webView evaluateJavaScript:js completionHandler:^(id _Nullable data, NSError * _Nullable error) {
+       
+        
+    }];
 
-
+    return;
     
 //    //    获取所有html:
 //    NSString *lJs1 = @"document.documentElement.innerHTML";
@@ -437,8 +446,8 @@
 // 从web界面中接收到一个脚本时调用
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
      NSLog(@"%s", __FUNCTION__); 
-    NSLog(@"%@", message);
-    
+    NSLog(@"%@", message.body);
+    NSLog(@"%@", message.name);
     
     
 }

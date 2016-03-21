@@ -241,7 +241,8 @@
 #pragma mark -- webViewDelegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     
-    NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.request.URL];
+    NSString *urlStr = [NSString stringWithFormat:@"%@",request.URL.absoluteString];
+    
     self.addressField.text = urlStr;
     return YES;
 }

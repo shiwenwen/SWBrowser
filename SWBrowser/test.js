@@ -40,3 +40,9 @@ function getARGBImage(){
     return dataArray.toString()+","+img.width+","+img.height;
 }
 getARGBImage()
+//var message = {
+//    method:"hello",
+//    param:"石文文",
+//};
+//window.webkit.messageHandlers.webViewApp.postMessage(message);
+
