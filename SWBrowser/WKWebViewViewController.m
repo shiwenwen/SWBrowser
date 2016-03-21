@@ -448,6 +448,7 @@
      NSLog(@"%s", __FUNCTION__); 
     NSLog(@"%@", message.body);
     NSLog(@"%@", message.name);
+    [[[UIAlertView alloc]initWithTitle:message.name message:message.body delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] show];;
     
     
 }
