@@ -92,6 +92,10 @@
 		2B3D10741C9821A900897426 /* 学信.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B3D10731C9821A900897426 /* 学信.jpg */; };
 		2B3D10AA1C98358200897426 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D10A71C98358200897426 /* NJKWebViewProgress.m */; };
 		2B3D10AB1C98358200897426 /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D10A91C98358200897426 /* NJKWebViewProgressView.m */; };
+		2B57C2EC1CA0FF3C00068CFC /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B57C2E51CA0FF3C00068CFC /* WebViewJavascriptBridge.m */; };
+		2B57C2ED1CA0FF3C00068CFC /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B57C2E71CA0FF3C00068CFC /* WebViewJavascriptBridge_JS.m */; };
+		2B57C2EE1CA0FF3C00068CFC /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B57C2E91CA0FF3C00068CFC /* WebViewJavascriptBridgeBase.m */; };
+		2B57C2EF1CA0FF3C00068CFC /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B57C2EB1CA0FF3C00068CFC /* WKWebViewJavascriptBridge.m */; };
 		2B602DDF1C9A540300222C18 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B602DDE1C9A540300222C18 /* NSData+Base64.m */; };
 		2B602DE31C9A601100222C18 /* WWWebViewProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B602DE21C9A601100222C18 /* WWWebViewProtocol.m */; };
 		2B602DE51C9A946600222C18 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B602DE41C9A946600222C18 /* CoreTelephony.framework */; };
@@ -288,6 +292,14 @@
 		2B3D10A71C98358200897426 /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgress.m; sourceTree = "<group>"; };
 		2B3D10A81C98358200897426 /* NJKWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgressView.h; sourceTree = "<group>"; };
 		2B3D10A91C98358200897426 /* NJKWebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgressView.m; sourceTree = "<group>"; };
+		2B57C2E41CA0FF3C00068CFC /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		2B57C2E51CA0FF3C00068CFC /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
+		2B57C2E61CA0FF3C00068CFC /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
+		2B57C2E71CA0FF3C00068CFC /* WebViewJavascriptBridge_JS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge_JS.m; sourceTree = "<group>"; };
+		2B57C2E81CA0FF3C00068CFC /* WebViewJavascriptBridgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridgeBase.h; sourceTree = "<group>"; };
+		2B57C2E91CA0FF3C00068CFC /* WebViewJavascriptBridgeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridgeBase.m; sourceTree = "<group>"; };
+		2B57C2EA1CA0FF3C00068CFC /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		2B57C2EB1CA0FF3C00068CFC /* WKWebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewJavascriptBridge.m; sourceTree = "<group>"; };
 		2B602DDD1C9A540200222C18 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		2B602DDE1C9A540300222C18 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		2B602DE11C9A601100222C18 /* WWWebViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWWebViewProtocol.h; sourceTree = "<group>"; };
@@ -427,6 +439,7 @@
 		2B3D0F991C97B3E500897426 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				2B57C2E31CA0FF3C00068CFC /* WebViewJavascriptBridge */,
 				2B602DDD1C9A540200222C18 /* NSData+Base64.h */,
 				2B602DDE1C9A540300222C18 /* NSData+Base64.m */,
 				2B3D10A51C98358200897426 /* NJKWebViewProgress */,
@@ -708,6 +721,21 @@
 			path = NJKWebViewProgress;
 			sourceTree = "<group>";
 		};
+		2B57C2E31CA0FF3C00068CFC /* WebViewJavascriptBridge */ = {
+			isa = PBXGroup;
+			children = (
+				2B57C2E41CA0FF3C00068CFC /* WebViewJavascriptBridge.h */,
+				2B57C2E51CA0FF3C00068CFC /* WebViewJavascriptBridge.m */,
+				2B57C2E61CA0FF3C00068CFC /* WebViewJavascriptBridge_JS.h */,
+				2B57C2E71CA0FF3C00068CFC /* WebViewJavascriptBridge_JS.m */,
+				2B57C2E81CA0FF3C00068CFC /* WebViewJavascriptBridgeBase.h */,
+				2B57C2E91CA0FF3C00068CFC /* WebViewJavascriptBridgeBase.m */,
+				2B57C2EA1CA0FF3C00068CFC /* WKWebViewJavascriptBridge.h */,
+				2B57C2EB1CA0FF3C00068CFC /* WKWebViewJavascriptBridge.m */,
+			);
+			path = WebViewJavascriptBridge;
+			sourceTree = "<group>";
+		};
 		2B602DE01C9A5FC200222C18 /* CustomURLProtocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -857,6 +885,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B3D10321C97B3F200897426 /* UIRefreshControl+AFNetworking.m in Sources */,
+				2B57C2EC1CA0FF3C00068CFC /* WebViewJavascriptBridge.m in Sources */,
 				2B3D103D1C97B3F200897426 /* MJRefreshAutoGifFooter.m in Sources */,
 				2B3D103F1C97B3F200897426 /* MJRefreshAutoStateFooter.m in Sources */,
 				2B3D10281C97B3F200897426 /* AFURLConnectionOperation.m in Sources */,
@@ -865,6 +894,7 @@
 				2B3D10571C97B3F200897426 /* UIImage+MultiFormat.m in Sources */,
 				2B3D10AB1C98358200897426 /* NJKWebViewProgressView.m in Sources */,
 				2B3D0F961C97B37100897426 /* ImageTools.m in Sources */,
+				2B57C2ED1CA0FF3C00068CFC /* WebViewJavascriptBridge_JS.m in Sources */,
 				2B3D10581C97B3F200897426 /* UIImage+WebP.m in Sources */,
 				2B3D10501C97B3F200897426 /* SDWebImageDecoder.m in Sources */,
 				2B3D104F1C97B3F200897426 /* SDWebImageCompat.m in Sources */,
@@ -880,6 +910,7 @@
 				2B3D102A1C97B3F200897426 /* AFURLResponseSerialization.m in Sources */,
 				2B3D10591C97B3F200897426 /* UIImageView+HighlightedWebCache.m in Sources */,
 				2B3D106C1C97CB7900897426 /* XPathQuery.m in Sources */,
+				2B57C2EF1CA0FF3C00068CFC /* WKWebViewJavascriptBridge.m in Sources */,
 				2B3D10491C97B3F200897426 /* UIScrollView+MJRefresh.m in Sources */,
 				2B3D10481C97B3F200897426 /* UIScrollView+MJExtension.m in Sources */,
 				2B3D10AA1C98358200897426 /* NJKWebViewProgress.m in Sources */,
@@ -894,6 +925,7 @@
 				2B3D0F941C97B37100897426 /* MBProgressHUD.m in Sources */,
 				2B3D102D1C97B3F200897426 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2B602DE31C9A601100222C18 /* WWWebViewProtocol.m in Sources */,
+				2B57C2EE1CA0FF3C00068CFC /* WebViewJavascriptBridgeBase.m in Sources */,
 				2B3D10291C97B3F200897426 /* AFURLRequestSerialization.m in Sources */,
 				2B3D102C1C97B3F200897426 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				2B3D10271C97B3F200897426 /* AFSecurityPolicy.m in Sources */,

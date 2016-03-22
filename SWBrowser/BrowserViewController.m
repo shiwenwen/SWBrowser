@@ -11,6 +11,7 @@
 #import "NJKWebViewProgress.h"
 #import "NJKWebViewProgressView.h"
 #import "NSData+Base64.h"
+#import "WebViewJavascriptBridge.h"
 @interface BrowserViewController ()<UITextFieldDelegate,UIWebViewDelegate,NJKWebViewProgressDelegate>{
     
     NJKWebViewProgressView *_progressView;
@@ -21,6 +22,7 @@
 @property (nonatomic,strong)UILabel *titleLabel;
 @property (nonatomic,strong)UITextView *contentView;
 @property (nonatomic,strong)UIImageView *imageView;
+@property WebViewJavascriptBridge* bridge;
 @end
 
 @implementation BrowserViewController
@@ -51,6 +53,9 @@
     
     
     [self.webView loadRequest:request];
+    
+    
+
 
 //    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"网页测试" ofType:@"html"];
 //    NSString *htmlString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
@@ -68,7 +73,7 @@
 
     
     self.webView.delegate = _progressProxy;
-    
+    self.webView.delegate = self;
     
     /*
      
@@ -243,16 +248,19 @@
     
     NSString *urlStr = [NSString stringWithFormat:@"%@",request.URL.absoluteString];
     
-    self.addressField.text = urlStr;
+    self.addressField.text = request.URL.absoluteString;
     return YES;
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView{
     NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.request.URL];
     self.addressField.text = urlStr;
+    
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-
-
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.request.URL];
+    self.addressField.text = urlStr;
+  
     
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{

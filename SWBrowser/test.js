@@ -39,10 +39,17 @@ function getARGBImage(){
         dataArray[i] = imageData.data[i];
     return dataArray.toString()+","+img.width+","+img.height;
 }
-getARGBImage()
+//getARGBImage()
 //var message = {
 //    method:"hello",
 //    param:"石文文",
 //};
 //window.webkit.messageHandlers.webViewApp.postMessage(message);
+
+var arr = document.getElementsByTagName('img');
+for(var obj in arr){
+    
+    obj.setAttribute('onclick',alert('测试'));
+}；
+
 

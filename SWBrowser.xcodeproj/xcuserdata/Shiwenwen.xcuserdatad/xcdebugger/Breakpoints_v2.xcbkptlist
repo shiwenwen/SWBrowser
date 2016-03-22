@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SWBrowser/BrowserViewController.m"
-            timestampString = "480248371.932319"
+            timestampString = "480308009.308503"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "464"
-            endingLineNumber = "464"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
             landmarkName = "-getJingdongList:"
             landmarkType = "5">
          </BreakpointContent>
