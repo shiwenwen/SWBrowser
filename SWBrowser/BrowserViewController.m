@@ -73,7 +73,7 @@
 
     
     self.webView.delegate = _progressProxy;
-    self.webView.delegate = self;
+//    self.webView.delegate = self;
     
     /*
      
