@@ -11,7 +11,11 @@
 #import "TFHpple.h"
 #import "NSData+Base64.h"
 #import <JavaScriptCore/JavaScriptCore.h>
-@interface WKWebViewViewController ()<UITextFieldDelegate,WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
+@interface WKWebViewViewController ()<UITextFieldDelegate,WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate,NSURLConnectionDelegate>{
+    
+    BOOL _isAuth12306;
+    NSInteger _index12306;
+}
 @property (nonatomic,strong)WKWebView *webView;
 @property (nonatomic,strong)UITextField *addressField;
 @property (nonatomic,strong)UILabel *titleLabel;
@@ -281,16 +285,16 @@
     NSLog(@"%s", __FUNCTION__); //网页加载完成
     NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.URL];
     self.addressField.text = urlStr;
-    
-    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"test" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
+//    
+    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"chis" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
     
     [self.webView evaluateJavaScript:js completionHandler:^(id _Nullable data, NSError * _Nullable error) {
        
-        
+        NSLog(@"data = %@",data);
     }];
 
     return;
-    
+//
 //    //    获取所有html:
 //    NSString *lJs1 = @"document.documentElement.innerHTML";
 //    //    获取网页title:
@@ -355,6 +359,7 @@
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     
     NSLog(@"%s", __FUNCTION__);
+    NSLog(@"error = %@",error);
 }
 
 /**
@@ -377,6 +382,9 @@
  */
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler {
      NSLog(@"%s", __FUNCTION__);
+    
+    
+    
           // 允许跳转
         decisionHandler(WKNavigationResponsePolicyAllow);
     
@@ -394,11 +402,37 @@
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
      NSLog(@"%s", __FUNCTION__);
     
-        // 允许跳转
+    NSString* scheme = [[webView URL] scheme].lowercaseString;
+    //    NSLog(@"scheme = %@",scheme);
+    
+    
+    //判断是不是https
+    
+//    if (!_isAuth12306) {
+//        if ([scheme isEqualToString:@"https"]) {
+//            //如果是https:的话，那么就用NSURLConnection来重发请求。从而在请求的过程当中吧要请求的URL做信任处理。
+//            
+//            
+//            NSURLConnection* conn = [[NSURLConnection alloc] initWithRequest:[[NSURLRequest alloc]initWithURL:webView.URL ] delegate:self];
+//            [conn start];
+//            
+//            
+//
+//            
+//        }
+//        // 不允许跳转
+//        decisionHandler(WKNavigationActionPolicyCancel);
+//    }else{
+//        
+//        // 允许跳转
         decisionHandler(WKNavigationActionPolicyAllow);
+//    }
 
-    // 不允许跳转
-//    decisionHandler(WKNavigationActionPolicyCancel);
+    
+    
+    
+
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -647,6 +681,36 @@
     return -1;
     
 }
+#pragma mark -- NSURLConnectionDelegate
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+    _isAuth12306 = YES;
+    if ([challenge previousFailureCount]== 0) {
+        //NSURLCredential 这个类是表示身份验证凭据不可变对象。凭证的实际类型声明的类的构造函数来确定。
+        NSURLCredential* cre = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+        [challenge.sender useCredential:cre forAuthenticationChallenge:challenge];
+        
+    }
+}
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
+    
+}
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
+{
+    return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
+- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
+    //    NSLog(@"%@",request);
+    return request;
+}
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [connection cancel];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:self.defaultUrl]cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
+    request.HTTPShouldHandleCookies = YES;
+    [self.webView loadRequest:request];
+    [self.webView reload];
+    
+}
+
 
 /*
 #pragma mark - Navigation

@@ -38,6 +38,13 @@
                                     <action selector="gotoJingdong:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dIS-MC-781"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bje-aZ-1K9">
+                                <rect key="frame" x="29" y="193" width="44" height="30"/>
+                                <state key="normal" title="12306"/>
+                                <connections>
+                                    <action selector="goto12306:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dFy-eM-RaE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

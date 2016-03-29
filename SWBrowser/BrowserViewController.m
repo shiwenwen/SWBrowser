@@ -12,10 +12,12 @@
 #import "NJKWebViewProgressView.h"
 #import "NSData+Base64.h"
 #import "WebViewJavascriptBridge.h"
-@interface BrowserViewController ()<UITextFieldDelegate,UIWebViewDelegate,NJKWebViewProgressDelegate>{
+@interface BrowserViewController ()<UITextFieldDelegate,UIWebViewDelegate,NJKWebViewProgressDelegate,NSURLConnectionDelegate>{
     
     NJKWebViewProgressView *_progressView;
     NJKWebViewProgress *_progressProxy;
+    BOOL _isAuth12306;
+    NSInteger _index12306;
 }
 @property (nonatomic,strong)UIWebView *webView;
 @property (nonatomic,strong)UITextField *addressField;
@@ -72,8 +74,8 @@
     _progressView = [[NJKWebViewProgressView alloc]initWithFrame:CGRectMake(0, 98, KScreenWidth, 2)];
 
     
-    self.webView.delegate = _progressProxy;
-//    self.webView.delegate = self;
+//    self.webView.delegate = _progressProxy;
+    self.webView.delegate = self;
     
     /*
      
@@ -248,21 +250,110 @@
     
     NSString *urlStr = [NSString stringWithFormat:@"%@",request.URL.absoluteString];
     
-    self.addressField.text = request.URL.absoluteString;
+    self.addressField.text = urlStr;
+//    return YES;
+    
+    NSString* scheme = [[request URL] scheme].lowercaseString;
+//    NSLog(@"scheme = %@",scheme);
+    
+    
+    //判断是不是https
+    
+    if (!_isAuth12306) {
+        if ([scheme isEqualToString:@"https"]) {
+            //如果是https:的话，那么就用NSURLConnection来重发请求。从而在请求的过程当中吧要请求的URL做信任处理。
+            
+            NSURLConnection* conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+            [conn start];
+            
+            
+            return NO;
+            
+        }
+    }
+    
     return YES;
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView{
     NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.request.URL];
     self.addressField.text = urlStr;
-    
+
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    
+    _index12306 ++;
+  
     NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.request.URL];
     self.addressField.text = urlStr;
-  
+    
+    dispatch_async(dispatch_get_global_queue(2, 0), ^{
+        [self saveLoginSession];
+    });
+    
+
+    
+
+    
+    //网页加载完成
+    self.addressField.text = urlStr;
+    
+    
+    //    获取所有html:
+    NSString *lJs1 = @"document.documentElement.innerHTML";
+    //    获取网页title:
+    NSString *lJs2 = @"document.title";
+    
+    NSString *lHtml1 = [self.webView stringByEvaluatingJavaScriptFromString:lJs1];
+    NSString *lHtml2 = [self.webView stringByEvaluatingJavaScriptFromString:lJs2];
+    
+    
+    self.titleLabel.text = lHtml2;//设置标题
+    
+    //获取html的data数据
+    //转换成GBK编码
+    NSStringEncoding gbEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    
+    NSData *htmlData = [lHtml1 dataUsingEncoding:gbEncoding];
+    
+    lHtml1 = [lHtml1 stringByReplacingOccurrencesOfString:@"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=gb2312\">"
+                                               withString:@"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">"];
+//    NSLog(@"lHtml1 = %@\n lHtml2 =%@ ",lHtml1,lHtml2);
+    htmlData = [lHtml1 dataUsingEncoding:NSUTF8StringEncoding];
+    //    NSString *htmlStr = [[NSString  alloc]initWithData:htmlData encoding:NSUTF8StringEncoding];
+    //    NSLog(@"htmlStr = %@",htmlData);
+    //解析html数据
+    TFHpple *xpathParser = [[TFHpple alloc]initWithHTMLData:htmlData];
+    //根据标签来进行过滤
+    
+    
+    if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] < 0) {
+        //不是需要抓取的页面
+        
+        self.imageView.hidden = YES;
+        self.contentView.text = @"无可用数据 请进入学信档案 - 高等教育 - 学历信息";
+        //            self.contentView.text = lHtml1;//调试用
+        return;
+    }else if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] == 0){
+        
+        [self getJingdongList:xpathParser];
+        
+    }else if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] == 1){
+        
+        [self getInfoFromCHSI:xpathParser];//学信网信息抓取
+    }else if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] == 2){
+        
+        
+        
+    }else if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] == 3){
+        
+        [self InfoOf12306:xpathParser];
+    }
+    
+    
+    
     
 }
+
+
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{
     
 
@@ -280,70 +371,6 @@
         self.contentView.text = @"";
         self.imageView.hidden = YES;
     }else if (progress == 1){
-        
-       
-        dispatch_async(dispatch_get_global_queue(2, 0), ^{
-            [self saveLoginSession];
-        });
-        
-
-  
-        //网页加载完成
-        NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.request.URL];
-        self.addressField.text = urlStr;
-        
-        
-        //    获取所有html:
-        NSString *lJs1 = @"document.documentElement.innerHTML";
-        //    获取网页title:
-        NSString *lJs2 = @"document.title";
-        
-        NSString *lHtml1 = [self.webView stringByEvaluatingJavaScriptFromString:lJs1];
-        NSString *lHtml2 = [self.webView stringByEvaluatingJavaScriptFromString:lJs2];
-        
-
-        
-        self.titleLabel.text = lHtml2;//设置标题
-
-        //获取html的data数据
-        //转换成GBK编码
-        NSStringEncoding gbEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-        
-        NSData *htmlData = [lHtml1 dataUsingEncoding:gbEncoding];
-
-        lHtml1 = [lHtml1 stringByReplacingOccurrencesOfString:@"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=gb2312\">"
-                                                   withString:@"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">"];
-        NSLog(@"lHtml1 = %@\n lHtml2 =%@ ",lHtml1,lHtml2);
-        htmlData = [lHtml1 dataUsingEncoding:NSUTF8StringEncoding];
-        //    NSString *htmlStr = [[NSString  alloc]initWithData:htmlData encoding:NSUTF8StringEncoding];
-        //    NSLog(@"htmlStr = %@",htmlData);
-        //解析html数据
-        TFHpple *xpathParser = [[TFHpple alloc]initWithHTMLData:htmlData];
-        //根据标签来进行过滤
-        
-
-        if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] < 0) {
-            //不是需要抓取的页面
-            
-            self.imageView.hidden = YES;
-            self.contentView.text = @"无可用数据 请进入学信档案 - 高等教育 - 学历信息";
-//            self.contentView.text = lHtml1;//调试用
-            return;
-        }else if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] == 0){
-            
-            [self getJingdongList:xpathParser];
-            
-        }else if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] == 1){
-            
-             [self getInfoFromCHSI:xpathParser];//学信网信息抓取
-        }else if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] == 2){
-            
-            
-            
-        }
-        
-        
-        
         
     }
     
@@ -529,6 +556,41 @@
     self.contentView.text = content;
     
 }
+
+#pragma mark -- 12306
+-(void)InfoOf12306:(TFHpple *)xpathParser{
+    if (_index12306 < 3) {
+        return;
+    }
+    TFHppleElement *passengers = [xpathParser searchWithXPathQuery:@"//body/script"][0];
+    
+    
+    
+
+    
+    NSRange range1 = [passengers.content rangeOfString:@"passengers="];
+    NSRange  range2 = [passengers.content rangeOfString:@"}]"];
+    if (range1.location != NSNotFound && range2.location != NSNotFound) {
+    
+        NSString *json = [passengers.content substringWithRange:NSMakeRange(range1.location + range1.length, range2.location +range2.length - range1.location - range1.length)];
+
+//    NSLog(@"passengers = %@",json);
+       json =  [json stringByReplacingOccurrencesOfString:@"'" withString:@"\""];
+        
+        NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
+        
+       NSArray *passengerArr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"passengers = %@",passengerArr);
+        NSMutableString *content = [NSMutableString string];
+        for (NSDictionary *passenger in passengerArr) {
+            
+            [content appendFormat:@"----------------------------------------\n是否是用户自己:%@\n手机号:%@\n证件号:%@\n证件类型:%@\n证件名:%@\n用户名:%@\n用户类型:%@\n用户类型名:%@\ntotal_times:%@\n",passenger[@"isUserSelf"],passenger[@"mobile_no"],passenger[@"passenger_id_no"],passenger[@"passenger_id_type_code"],passenger[@"passenger_id_type_name"],passenger[@"passenger_name"],passenger[@"passenger_type"],passenger[@"passenger_type_name"],passenger[@"total_times"]];
+         
+            self.contentView.text = content;
+        }
+    }
+    
+}
 #pragma mark - 获取可抓取页面的url字符串index
 - (NSInteger )getAllowedUrlIndexFromAllowedUrlsWithUrlString:(NSString *)urlString{
 
@@ -546,6 +608,37 @@
     return -1;
     
 }
+
+#pragma mark -- NSURLConnectionDelegate
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+    _isAuth12306 = YES;
+    if ([challenge previousFailureCount]== 0) {
+    //NSURLCredential 这个类是表示身份验证凭据不可变对象。凭证的实际类型声明的类的构造函数来确定。
+    NSURLCredential* cre = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+    [challenge.sender useCredential:cre forAuthenticationChallenge:challenge];
+
+    }
+}
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
+    
+   }
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
+{
+    return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
+- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
+//    NSLog(@"%@",request);
+    return request;
+}
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [connection cancel];
+   NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:self.defaultUrl]cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
+    request.HTTPShouldHandleCookies = YES;
+    [self.webView loadRequest:request];
+    [self.webView reload];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

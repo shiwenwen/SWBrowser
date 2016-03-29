@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B1266A01CAA920E00C28CFB /* chis.js in Resources */ = {isa = PBXBuildFile; fileRef = 2B12669F1CAA920E00C28CFB /* chis.js */; };
 		2B2EC1801C9BAEB10063C23A /* base.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EC17F1C9BAEB10063C23A /* base.txt */; };
 		2B2EC1821C9BB8530063C23A /* 网页测试.html in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EC1811C9BB8530063C23A /* 网页测试.html */; };
 		2B2EC1841C9BBA010063C23A /* bd_logo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EC1831C9BBA010063C23A /* bd_logo1.png */; };
@@ -100,6 +101,7 @@
 		2B602DE31C9A601100222C18 /* WWWebViewProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B602DE21C9A601100222C18 /* WWWebViewProtocol.m */; };
 		2B602DE51C9A946600222C18 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B602DE41C9A946600222C18 /* CoreTelephony.framework */; };
 		2B602DE71C9ABD6A00222C18 /* test.js in Resources */ = {isa = PBXBuildFile; fileRef = 2B602DE61C9ABD6A00222C18 /* test.js */; };
+		2B68CA211CAA2F99008B0311 /* test2.js in Resources */ = {isa = PBXBuildFile; fileRef = 2B68CA201CAA2F99008B0311 /* test2.js */; };
 		2BAB55C21C990AC00052A58A /* WKWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB55C01C990AC00052A58A /* WKWebViewViewController.m */; };
 		2BAB55C31C990AC00052A58A /* WKWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BAB55C11C990AC00052A58A /* WKWebViewViewController.xib */; };
 		2BAB55C51C99138A0052A58A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB55C41C99138A0052A58A /* WebKit.framework */; };
@@ -125,6 +127,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B12669F1CAA920E00C28CFB /* chis.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = chis.js; sourceTree = "<group>"; };
 		2B2EC17F1C9BAEB10063C23A /* base.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = base.txt; sourceTree = "<group>"; };
 		2B2EC1811C9BB8530063C23A /* 网页测试.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "网页测试.html"; sourceTree = "<group>"; };
 		2B2EC1831C9BBA010063C23A /* bd_logo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bd_logo1.png; sourceTree = "<group>"; };
@@ -306,6 +309,7 @@
 		2B602DE21C9A601100222C18 /* WWWebViewProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWWebViewProtocol.m; sourceTree = "<group>"; };
 		2B602DE41C9A946600222C18 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		2B602DE61C9ABD6A00222C18 /* test.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
+		2B68CA201CAA2F99008B0311 /* test2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = test2.js; sourceTree = "<group>"; };
 		2BAB55BF1C990AC00052A58A /* WKWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewViewController.h; sourceTree = "<group>"; };
 		2BAB55C01C990AC00052A58A /* WKWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewViewController.m; sourceTree = "<group>"; };
 		2BAB55C11C990AC00052A58A /* WKWebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKWebViewViewController.xib; sourceTree = "<group>"; };
@@ -374,6 +378,8 @@
 				2B3D0F581C97B23300897426 /* AppDelegate.h */,
 				2B3D0F591C97B23300897426 /* AppDelegate.m */,
 				2B602DE61C9ABD6A00222C18 /* test.js */,
+				2B68CA201CAA2F99008B0311 /* test2.js */,
+				2B12669F1CAA920E00C28CFB /* chis.js */,
 				2B2EC17F1C9BAEB10063C23A /* base.txt */,
 				2B2EC1811C9BB8530063C23A /* 网页测试.html */,
 				2B3D0F5B1C97B23300897426 /* ViewController.h */,
@@ -849,6 +855,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B2EC1821C9BB8530063C23A /* 网页测试.html in Resources */,
+				2B1266A01CAA920E00C28CFB /* chis.js in Resources */,
 				2B602DE71C9ABD6A00222C18 /* test.js in Resources */,
 				2B3D0F651C97B23300897426 /* LaunchScreen.storyboard in Resources */,
 				2B3D0F8C1C97B26600897426 /* BrowserViewController.xib in Resources */,
@@ -859,6 +866,7 @@
 				2B3D10741C9821A900897426 /* 学信.jpg in Resources */,
 				2BAB55C31C990AC00052A58A /* WKWebViewViewController.xib in Resources */,
 				2B3D10371C97B3F200897426 /* LICENSE in Resources */,
+				2B68CA211CAA2F99008B0311 /* test2.js in Resources */,
 				2B2EC1801C9BAEB10063C23A /* base.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
