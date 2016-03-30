@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B1266A01CAA920E00C28CFB /* chis.js in Resources */ = {isa = PBXBuildFile; fileRef = 2B12669F1CAA920E00C28CFB /* chis.js */; };
+		2B1266A01CAA920E00C28CFB /* chsi.js in Resources */ = {isa = PBXBuildFile; fileRef = 2B12669F1CAA920E00C28CFB /* chsi.js */; };
 		2B2EC1801C9BAEB10063C23A /* base.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EC17F1C9BAEB10063C23A /* base.txt */; };
 		2B2EC1821C9BB8530063C23A /* 网页测试.html in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EC1811C9BB8530063C23A /* 网页测试.html */; };
 		2B2EC1841C9BBA010063C23A /* bd_logo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EC1831C9BBA010063C23A /* bd_logo1.png */; };
@@ -106,6 +106,7 @@
 		2BAB55C31C990AC00052A58A /* WKWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BAB55C11C990AC00052A58A /* WKWebViewViewController.xib */; };
 		2BAB55C51C99138A0052A58A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB55C41C99138A0052A58A /* WebKit.framework */; };
 		2BAB55C71C992C240052A58A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB55C61C992C240052A58A /* SystemConfiguration.framework */; };
+		2BCCDBFA1CABBCE200A16154 /* get12306.js in Resources */ = {isa = PBXBuildFile; fileRef = 2BCCDBF91CABBCE200A16154 /* get12306.js */; };
 		884DA71A1C9D9F170096763C /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884DA7191C9D9F170096763C /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -127,7 +128,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2B12669F1CAA920E00C28CFB /* chis.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = chis.js; sourceTree = "<group>"; };
+		2B12669F1CAA920E00C28CFB /* chsi.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = chsi.js; sourceTree = "<group>"; };
 		2B2EC17F1C9BAEB10063C23A /* base.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = base.txt; sourceTree = "<group>"; };
 		2B2EC1811C9BB8530063C23A /* 网页测试.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "网页测试.html"; sourceTree = "<group>"; };
 		2B2EC1831C9BBA010063C23A /* bd_logo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bd_logo1.png; sourceTree = "<group>"; };
@@ -315,6 +316,7 @@
 		2BAB55C11C990AC00052A58A /* WKWebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKWebViewViewController.xib; sourceTree = "<group>"; };
 		2BAB55C41C99138A0052A58A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		2BAB55C61C992C240052A58A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2BCCDBF91CABBCE200A16154 /* get12306.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = get12306.js; sourceTree = "<group>"; };
 		884DA7191C9D9F170096763C /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -379,7 +381,8 @@
 				2B3D0F591C97B23300897426 /* AppDelegate.m */,
 				2B602DE61C9ABD6A00222C18 /* test.js */,
 				2B68CA201CAA2F99008B0311 /* test2.js */,
-				2B12669F1CAA920E00C28CFB /* chis.js */,
+				2B12669F1CAA920E00C28CFB /* chsi.js */,
+				2BCCDBF91CABBCE200A16154 /* get12306.js */,
 				2B2EC17F1C9BAEB10063C23A /* base.txt */,
 				2B2EC1811C9BB8530063C23A /* 网页测试.html */,
 				2B3D0F5B1C97B23300897426 /* ViewController.h */,
@@ -855,7 +858,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B2EC1821C9BB8530063C23A /* 网页测试.html in Resources */,
-				2B1266A01CAA920E00C28CFB /* chis.js in Resources */,
+				2B1266A01CAA920E00C28CFB /* chsi.js in Resources */,
 				2B602DE71C9ABD6A00222C18 /* test.js in Resources */,
 				2B3D0F651C97B23300897426 /* LaunchScreen.storyboard in Resources */,
 				2B3D0F8C1C97B26600897426 /* BrowserViewController.xib in Resources */,
@@ -866,6 +869,7 @@
 				2B3D10741C9821A900897426 /* 学信.jpg in Resources */,
 				2BAB55C31C990AC00052A58A /* WKWebViewViewController.xib in Resources */,
 				2B3D10371C97B3F200897426 /* LICENSE in Resources */,
+				2BCCDBFA1CABBCE200A16154 /* get12306.js in Resources */,
 				2B68CA211CAA2F99008B0311 /* test2.js in Resources */,
 				2B2EC1801C9BAEB10063C23A /* base.txt in Resources */,
 			);

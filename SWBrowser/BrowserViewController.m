@@ -291,12 +291,15 @@
     
 
     
-
+    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"get12306" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
+    NSString *json = [self.webView stringByEvaluatingJavaScriptFromString:js];
+    NSLog(@"json = %@",json);
+    NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSArray *infoArr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     
     //网页加载完成
     self.addressField.text = urlStr;
-    
-    
     //    获取所有html:
     NSString *lJs1 = @"document.documentElement.innerHTML";
     //    获取网页title:
