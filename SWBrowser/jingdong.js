@@ -24,13 +24,14 @@ function getJiongdongList(){
         var shopText = oderShop[0]
         dic = jsonDicApPend("订单来源",shopText.innerHTML,dic)
         //收货信息
-        // var pcNode = getElementsByClassName("pc",tbody)[0];
-        // var pcInner;
-        // for(var j = 0;j < pcNode.getElementsByTagName("*").length ;j++ ){
-        //     pcInner = pcInner +"\n"+ pcNode.getElementsByTagName("*")[j].innerHTML
-        //
-        // }
-        // dic = jsonDicApPend("收货信息",pcInner,dic)
+        var pcNode = getElementsByClassName("pc",tbody)[0];
+
+        var  strong = pcNode.getElementsByTagName("strong")[0]
+        var  p0 = pcNode.getElementsByTagName("p")[0]
+        var  p1 = pcNode.getElementsByTagName("p")[1]
+        var pcInner = "姓名:"+strong.innerHTML+",地址:" + p0.innerHTML +",手机号"+ p1.innerHTML
+
+        dic = jsonDicApPend("收货信息",pcInner,dic)
 
         //商品
         var trbds = getElementsByClassName("tr-bd",tbody)
@@ -59,7 +60,7 @@ function getJiongdongList(){
 
             pArr.push(pDic)
         }
-        dic = jsonDicApPend("商品列表",'['+ pArr.toString()+']',dic)
+        dic = jsonDicApPend("商品列表",pArr,dic)
         //订单状态
         var status = getElementsByClassName("status",tbody)[0]
         var statusInfo = status.getElementsByTagName("span")[0]
@@ -106,8 +107,16 @@ function getElementsByClassName(className,element) {
 
 }
 function dataToJsonString(key,value) {
+    var sting
 
-    var string = '{'+'"'+key+'"'+':'+'"'+value+'"'+',}';
+    if(typeof(value) == "string"){
+      string = '{'+'"'+key+'"'+':'+'"'+value+'"'+'}';
+
+    }else{
+
+        string = '{'+'"'+key+'"'+':'+'['+value.toString()+']'+'}'
+    }
+
 
 
     return string;
@@ -117,16 +126,28 @@ function datasToJsonString(keys,values) {
     for (var  i = 0; i< keys.length; i ++){
         var key = keys[i];
         var value = values[i];
-        string += '"'+key+'"'+':'+'"'+value+'"'+',';
+        if (i < keys.length - 1){
+            string += '"'+key+'"'+':'+'"'+value+'"'+',';
+        }else {
+            string += '"'+key+'"'+':'+'"'+value+'"';
+        }
+
     }
+
     return '{'+ string + '}'
 }
-
 function jsonDicApPend(key,value,dic) {
 
     var string = dic.substr(0,dic.length - 1)
 
-    return string +'"'+ key + '"'+':' +'"'+ value +'"' + ','+'}'
+    if(typeof(value) == "string"){
+        string = string + ','+'"'+ key + '"'+':' +'"'+ value +'"' + ''+'}'
+
+    }else {
+
+        string = string +','+'"'+ key + '"'+':' +'['+ value.toString() +']' + ''+'}'
+    }
+    return string
 
 }
 getJiongdongList()

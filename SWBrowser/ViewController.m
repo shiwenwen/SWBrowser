@@ -23,7 +23,7 @@
 }
 
 - (IBAction)gotoCHSI:(id)sender {
-    BrowserViewController *browser = [[BrowserViewController alloc]init];
+    WKWebViewViewController *browser = [[WKWebViewViewController alloc]init];
     browser.defaultUrl = @"http://my.chsi.com.cn/archive/xlarchive.action";
     browser.allowedUrls = @[@"http://order.jd.com/center/list.action",@"http://my.chsi.com.cn/archive/xlarchive.action",@"https://www.baidu.com"];
     [self presentViewController:browser animated:YES completion:^{

@@ -290,14 +290,23 @@
     
     [self.webView evaluateJavaScript:js completionHandler:^(id _Nullable json, NSError * _Nullable error) {
     
-        NSLog(@"json = %@",json);
+      
+        json = [json stringByReplacingOccurrencesOfString:@" " withString:@""];
+        json = [json stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        json = [json stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+        json = [json stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+          NSLog(@"json = %@",json);
         NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
-        
-        NSArray *infoArr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"infoArr = %@",infoArr);
-        
-        
+        NSArray *infoArr;
+        if (data) {
+            NSError *error;
+            infoArr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+            NSLog(@"infoList = %@,error = %@",infoArr,error);
+            
+        }
+     
     }];
+    
 
     return;
 //
