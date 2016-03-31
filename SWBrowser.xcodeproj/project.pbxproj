@@ -107,6 +107,7 @@
 		2BAB55C51C99138A0052A58A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB55C41C99138A0052A58A /* WebKit.framework */; };
 		2BAB55C71C992C240052A58A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB55C61C992C240052A58A /* SystemConfiguration.framework */; };
 		2BCCDBFA1CABBCE200A16154 /* get12306.js in Resources */ = {isa = PBXBuildFile; fileRef = 2BCCDBF91CABBCE200A16154 /* get12306.js */; };
+		2BCCDBFC1CACDB5F00A16154 /* jingdong.js in Resources */ = {isa = PBXBuildFile; fileRef = 2BCCDBFB1CACDB5F00A16154 /* jingdong.js */; };
 		884DA71A1C9D9F170096763C /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884DA7191C9D9F170096763C /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -317,6 +318,7 @@
 		2BAB55C41C99138A0052A58A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		2BAB55C61C992C240052A58A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2BCCDBF91CABBCE200A16154 /* get12306.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = get12306.js; sourceTree = "<group>"; };
+		2BCCDBFB1CACDB5F00A16154 /* jingdong.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jingdong.js; sourceTree = "<group>"; };
 		884DA7191C9D9F170096763C /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -382,6 +384,7 @@
 				2B602DE61C9ABD6A00222C18 /* test.js */,
 				2B68CA201CAA2F99008B0311 /* test2.js */,
 				2B12669F1CAA920E00C28CFB /* chsi.js */,
+				2BCCDBFB1CACDB5F00A16154 /* jingdong.js */,
 				2BCCDBF91CABBCE200A16154 /* get12306.js */,
 				2B2EC17F1C9BAEB10063C23A /* base.txt */,
 				2B2EC1811C9BB8530063C23A /* 网页测试.html */,
@@ -863,6 +866,7 @@
 				2B3D0F651C97B23300897426 /* LaunchScreen.storyboard in Resources */,
 				2B3D0F8C1C97B26600897426 /* BrowserViewController.xib in Resources */,
 				2B3D10461C97B3F200897426 /* MJRefresh.bundle in Resources */,
+				2BCCDBFC1CACDB5F00A16154 /* jingdong.js in Resources */,
 				2B3D0F621C97B23300897426 /* Assets.xcassets in Resources */,
 				2B2EC1841C9BBA010063C23A /* bd_logo1.png in Resources */,
 				2B3D0F601C97B23300897426 /* Main.storyboard in Resources */,

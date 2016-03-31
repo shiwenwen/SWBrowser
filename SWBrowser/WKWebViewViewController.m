@@ -286,14 +286,20 @@
     NSString *urlStr = [NSString stringWithFormat:@"%@",self.webView.URL];
     self.addressField.text = urlStr;
 //    
-//    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"chis" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
+    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"jingdong" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
     
-//    [self.webView evaluateJavaScript:js completionHandler:^(id _Nullable data, NSError * _Nullable error) {
+    [self.webView evaluateJavaScript:js completionHandler:^(id _Nullable json, NSError * _Nullable error) {
     
-//        NSLog(@"data = %@",data);
-//    }];
+        NSLog(@"json = %@",json);
+        NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSArray *infoArr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"infoArr = %@",infoArr);
+        
+        
+    }];
 
-//    return;
+    return;
 //
 //    //    获取所有html:
 //    NSString *lJs1 = @"document.documentElement.innerHTML";

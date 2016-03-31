@@ -21,19 +21,25 @@ function dataToJsonString(key,value) {
 
 	return string;
 }
-// function datasToJsonString(keys,values) {
-// 	var string;
-// 	for (var  i = 0; i< keys.length; i ++){
-// 		var key = keys[i];
-// 		var value = values[i];
-// 		string += '"'+key+'"'+':'+'"'+value+'"'+',';
-// 	}
-//
-//
-//
-//
-// 	return '{'+ string + '}'
-// }
+function datasToJsonString(keys,values) {
+	var string;
+	for (var  i = 0; i< keys.length; i ++){
+		var key = keys[i];
+		var value = values[i];
+		string += '"'+key+'"'+':'+'"'+value+'"'+',';
+	}
+
+
+
+
+	return '{'+ string + '}'
+}
+function jsonDicApPend(key,value,dic) {
+ 	var string = dic.substr(0,dic.length - 1)
+
+	return string +'"'+ key + '"'+':' +'"'+ value +'"' + ','+'}'
+
+}
 function getchis() {
 
 	var xjxlTable = document.getElementsByClassName("xjxlTable")[0];

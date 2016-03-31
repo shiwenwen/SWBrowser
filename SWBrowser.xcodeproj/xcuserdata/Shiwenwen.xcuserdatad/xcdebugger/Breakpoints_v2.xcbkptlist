@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SWBrowser/WKWebViewViewController.m"
-            timestampString = "480937187.040019"
+            timestampString = "481101899.020334"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "688"
-            endingLineNumber = "688"
+            startingLineNumber = "694"
+            endingLineNumber = "694"
             landmarkName = "-connection:willSendRequestForAuthenticationChallenge:"
             landmarkType = "5">
          </BreakpointContent>
@@ -35,13 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SWBrowser/BrowserViewController.m"
-            timestampString = "481016910.706959"
+            filePath = "SWBrowser/WKWebViewViewController.m"
+            timestampString = "481114760.627089"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
-            landmarkName = "-webViewDidFinishLoad:"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
+            landmarkName = "-webView:didFinishNavigation:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
