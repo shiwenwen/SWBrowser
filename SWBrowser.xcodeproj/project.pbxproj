@@ -102,6 +102,7 @@
 		2B602DE51C9A946600222C18 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B602DE41C9A946600222C18 /* CoreTelephony.framework */; };
 		2B602DE71C9ABD6A00222C18 /* test.js in Resources */ = {isa = PBXBuildFile; fileRef = 2B602DE61C9ABD6A00222C18 /* test.js */; };
 		2B68CA211CAA2F99008B0311 /* test2.js in Resources */ = {isa = PBXBuildFile; fileRef = 2B68CA201CAA2F99008B0311 /* test2.js */; };
+		2B6F20431CAE60A800E508D7 /* jquery-1.12.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 2B6F20421CAE60A800E508D7 /* jquery-1.12.1.min.js */; };
 		2BAB55C21C990AC00052A58A /* WKWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB55C01C990AC00052A58A /* WKWebViewViewController.m */; };
 		2BAB55C31C990AC00052A58A /* WKWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BAB55C11C990AC00052A58A /* WKWebViewViewController.xib */; };
 		2BAB55C51C99138A0052A58A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAB55C41C99138A0052A58A /* WebKit.framework */; };
@@ -312,6 +313,7 @@
 		2B602DE41C9A946600222C18 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		2B602DE61C9ABD6A00222C18 /* test.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
 		2B68CA201CAA2F99008B0311 /* test2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = test2.js; sourceTree = "<group>"; };
+		2B6F20421CAE60A800E508D7 /* jquery-1.12.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-1.12.1.min.js"; sourceTree = "<group>"; };
 		2BAB55BF1C990AC00052A58A /* WKWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewViewController.h; sourceTree = "<group>"; };
 		2BAB55C01C990AC00052A58A /* WKWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewViewController.m; sourceTree = "<group>"; };
 		2BAB55C11C990AC00052A58A /* WKWebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKWebViewViewController.xib; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				2BCCDBFB1CACDB5F00A16154 /* jingdong.js */,
 				2BCCDBF91CABBCE200A16154 /* get12306.js */,
 				2B2EC17F1C9BAEB10063C23A /* base.txt */,
+				2B6F20421CAE60A800E508D7 /* jquery-1.12.1.min.js */,
 				2B2EC1811C9BB8530063C23A /* 网页测试.html */,
 				2B3D0F5B1C97B23300897426 /* ViewController.h */,
 				2B3D0F5C1C97B23300897426 /* ViewController.m */,
@@ -874,6 +877,7 @@
 				2BAB55C31C990AC00052A58A /* WKWebViewViewController.xib in Resources */,
 				2B3D10371C97B3F200897426 /* LICENSE in Resources */,
 				2BCCDBFA1CABBCE200A16154 /* get12306.js in Resources */,
+				2B6F20431CAE60A800E508D7 /* jquery-1.12.1.min.js in Resources */,
 				2B68CA211CAA2F99008B0311 /* test2.js in Resources */,
 				2B2EC1801C9BAEB10063C23A /* base.txt in Resources */,
 			);

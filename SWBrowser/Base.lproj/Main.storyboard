@@ -45,6 +45,13 @@
                                     <action selector="goto12306:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dFy-eM-RaE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lOD-cy-3cA">
+                                <rect key="frame" x="37" y="246" width="30" height="30"/>
+                                <state key="normal" title="淘宝"/>
+                                <connections>
+                                    <action selector="gotoTaoBao:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G2i-zg-50n"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

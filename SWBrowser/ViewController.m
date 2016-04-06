@@ -60,6 +60,17 @@
     
     
 }
+- (IBAction)gotoTaoBao:(id)sender {
+    
+    BrowserViewController *browser = [[BrowserViewController alloc]init];
+    browser.defaultUrl = @"https://h5.m.taobao.com/mlapp/olist.html";
+    //    browser.defaultUrl = @"https://m.baidu.com/static/index/plus/plus_logo.png";
+    browser.allowedUrls = @[@"http://order.jd.com/center/list.action",@"http://my.chsi.com.cn/archive/xlarchive.action",@"https://www.baidu.com",@"https://kyfw.12306.cn/otn/passengers/init"];
+    [self presentViewController:browser animated:YES completion:^{
+        
+    }];
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

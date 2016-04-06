@@ -14,9 +14,33 @@ function getARGBImage(img){
 		dataArray[i] = imageData.data[i];
 	return dataArray.toString()+","+img.width+","+img.height;
 }
-function dataToJsonString(key,value) {
+function getBase64Image(img) {
 
-	var string = '{'+'"'+key+'"'+':'+'"'+value+'"'+'}';
+
+	var canvas = document.createElement("canvas");
+
+	canvas.width = img.width;
+	canvas.height = img.height;
+
+	var ctx = canvas.getContext("2d");
+
+	ctx.drawImage(img, 0, 0,image.width,image.height);
+
+	var dataURL = canvas.toDataURL("image/png");
+	return dataURL.replace(/^data:image\/(png|jpg);base64,/,"");
+
+}
+function dataToJsonString(key,value) {
+	var sting
+
+	if(typeof(value) == "string"){
+		string = '{'+'"'+key+'"'+':'+'"'+value+'"'+'}';
+
+	}else{
+
+		string = '{'+'"'+key+'"'+':'+'['+value.toString()+']'+'}'
+	}
+
 
 
 	return string;
@@ -34,15 +58,38 @@ function datasToJsonString(keys,values) {
 
 	}
 
-
-
-
 	return '{'+ string + '}'
 }
 function jsonDicApPend(key,value,dic) {
- 	var string = dic.substr(0,dic.length - 1)
 
-	return string +'"'+ key + '"'+':' +'"'+ value +'"' + ','+'}'
+	var string = dic.substr(0,dic.length - 1)
+
+	if(typeof(value) == "string"){
+		string = string + ','+'"'+ key + '"'+':' +'"'+ value +'"' + ''+'}'
+
+	}else {
+
+		string = string +','+'"'+ key + '"'+':' +'['+ value.toString() +']' + ''+'}'
+	}
+	return string
+
+}
+function getElementsByClassName(className,element) {
+	var children = element.getElementsByTagName('*');
+	var elements = new Array();
+	for (var i=0; i<children.length; i++){
+		var child = children[i];
+		var classNames = child.className.split(' ');
+		for (var j=0; j<classNames.length; j++){
+			if (classNames[j] == className){
+				elements.push(child);
+				break;
+			}
+		}
+	}
+	return elements;
+
+
 
 }
 function getchis() {
@@ -51,7 +98,7 @@ function getchis() {
 
 	var tbody = xjxlTable.getElementsByTagName("tbody")[0];
 
-	var dataArr = new Array();
+	var data ;
 	var length = tbody.getElementsByTagName("tr").length;
 
 	for (var j = 0;j < length ;j++) {
@@ -61,38 +108,35 @@ function getchis() {
 		if (j == 0) {
 
 			var th = tr.getElementsByTagName("th")[0];
-			var key = th.innerHTML;
+			var key = th.innerHTML.substr(0,th.innerHTML.length - 1);
 			var td = tr.getElementsByTagName("td")[0];
 			var value = td.innerHTML;
 
 
 			var img = tr.getElementsByTagName('img')[0];
-			dataArr.push(dataToJsonString(key,value));
-
-			dataArr.push(dataToJsonString("img",getARGBImage(img)));
-
+			// data.push(dataToJsonString(key,value));
+			data = dataToJsonString(key,value);
+			// data.push(dataToJsonString("img",getARGBImage(img)));
+			data = jsonDicApPend("img",getARGBImage(img),data);
+			// data = jsonDicApPend("img",getBase64Image(img),data);
 		} else {
 
 
 			for (i = 0; i < 2; i++) {
 
 				var th = tr.getElementsByTagName("th")[i];
-				var key = th.innerHTML;
+				var key = th.innerHTML.substr(0,th.innerHTML.length - 1);;
 				var td = tr.getElementsByTagName("td")[i];
 				var  value = td.innerHTML;
-				// if (( j == length - 1) && (i == 0)){
-                //
-					// var temp = td.getElementsByTagName("a")[0];
-				// 	value = temp.innerHTML;
-                //
-                // }
-				dataArr.push(dataToJsonString(key,value));
+
+                // data.push(dataToJsonString(key,value));
+				data = jsonDicApPend(key,value,data);
 			}
 		}
 
 	}
 
-	return "["+dataArr.toString()+"]";
+	return data;
 
 }
 getchis()

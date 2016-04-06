@@ -289,19 +289,23 @@
         [self saveLoginSession];
     });
     
-
+    NSString *lJs1 = @"document.documentElement.innerHTML";
     
-    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"get12306" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
-    NSString *json = [self.webView stringByEvaluatingJavaScriptFromString:js];
-    NSLog(@"json = %@",json);
-    NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
+   
+//    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"get12306" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
+//    NSString *json = [self.webView stringByEvaluatingJavaScriptFromString:js];
+//    NSLog(@"json = %@",json);
+//    NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
+//    
+//    NSArray *infoArr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+//    
     
-    NSArray *infoArr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    
     
     //网页加载完成
     self.addressField.text = urlStr;
     //    获取所有html:
-    NSString *lJs1 = @"document.documentElement.innerHTML";
+//    NSString *lJs1 = @"document.documentElement.innerHTML";
     //    获取网页title:
     NSString *lJs2 = @"document.title";
     
@@ -326,6 +330,23 @@
     //解析html数据
     TFHpple *xpathParser = [[TFHpple alloc]initWithHTMLData:htmlData];
     //根据标签来进行过滤
+    
+    NSArray *scripts = [xpathParser searchWithXPathQuery:@"//script"];
+    BOOL haveLoadJquery = false;
+    for (int i = 0; i < scripts.count; i++) {
+        
+        TFHppleElement *element = scripts[0];
+        for (NSString *attr in  element.attributes.allValues) {
+            if ([attr rangeOfString:@"jquery" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+                
+                haveLoadJquery = YES;
+            }
+            
+        }
+    }
+    if (!haveLoadJquery) {
+     //导入jquery
+    }
     
     
     if ([self getAllowedUrlIndexFromAllowedUrlsWithUrlString:urlStr] < 0) {
