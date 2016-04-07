@@ -35,12 +35,28 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SWBrowser/BrowserViewController.m"
-            timestampString = "481632217.46929"
+            filePath = "SWBrowser/WKWebViewViewController.m"
+            timestampString = "481717604.05385"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
+            landmarkName = "-webView:didFinishNavigation:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SWBrowser/BrowserViewController.m"
+            timestampString = "481717776.233759"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "-webViewDidFinishLoad:"
             landmarkType = "5">
          </BreakpointContent>

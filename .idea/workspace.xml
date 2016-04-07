@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79390055-c475-4c10-a466-83c790c70d00" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SWBrowser/jquery-1.12.1.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SWBrowser.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/SWBrowser.xcodeproj/project.pbxproj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SWBrowser.xcodeproj/xcuserdata/Shiwenwen.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" afterPath="$PROJECT_DIR$/SWBrowser.xcodeproj/xcuserdata/Shiwenwen.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SWBrowser/Base.lproj/Main.storyboard" afterPath="$PROJECT_DIR$/SWBrowser/Base.lproj/Main.storyboard" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SWBrowser/BrowserViewController.m" afterPath="$PROJECT_DIR$/SWBrowser/BrowserViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SWBrowser/TaoBao.js" afterPath="$PROJECT_DIR$/SWBrowser/TaoBao.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SWBrowser/ViewController.m" afterPath="$PROJECT_DIR$/SWBrowser/ViewController.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SWBrowser/WKWebViewViewController.m" afterPath="$PROJECT_DIR$/SWBrowser/WKWebViewViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SWBrowser/chsi.js" afterPath="$PROJECT_DIR$/SWBrowser/chsi.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SWBrowser/test.js" afterPath="$PROJECT_DIR$/SWBrowser/test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SWBrowser/test2.js" afterPath="$PROJECT_DIR$/SWBrowser/test2.js" />
     </list>
     <ignored path="SWBrowser.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,10 +43,22 @@
       <file leaf-file-name="jQueryTest.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SWBrowser/jQueryTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="45">
+              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="8" selection-end-column="72" />
               <folding>
                 <element signature="n#!!doc;n#loadJquery#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test2.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SWBrowser/test2.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -57,10 +67,30 @@
       <file leaf-file-name="TaoBao.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SWBrowser/TaoBao.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="33" column="26" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+            <state relative-caret-position="210">
+              <caret line="91" column="17" selection-start-line="91" selection-start-column="17" selection-end-line="91" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="E4X.js" pinned="false" current-in-tab="false">
+        <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/E4X.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="213">
+              <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jquery-1.12.1.min.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SWBrowser/jquery-1.12.1.min.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="1" column="767" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding>
-                <element signature="n#!!doc;n#datasToJsonString#0" expanded="false" />
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -70,7 +100,7 @@
         <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DOMCore.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="213">
-              <caret line="438" column="0" selection-start-line="438" selection-start-column="0" selection-end-line="438" selection-end-column="0" />
+              <caret line="539" column="0" selection-start-line="539" selection-start-column="0" selection-end-line="539" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -79,7 +109,7 @@
       <file leaf-file-name="DHTML.js" pinned="false" current-in-tab="false">
         <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
+            <state relative-caret-position="204">
               <caret line="1662" column="0" selection-start-line="1662" selection-start-column="0" selection-end-line="1662" selection-end-column="0" />
               <folding />
             </state>
@@ -96,34 +126,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chsi.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SWBrowser/chsi.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="jingdong.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SWBrowser/jingdong.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="30" />
+            <state relative-caret-position="-210">
+              <caret line="86" column="4" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jquery-1.12.1.min.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SWBrowser/jquery-1.12.1.min.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="1" column="26791" selection-start-line="1" selection-start-column="26791" selection-end-line="1" selection-end-column="26791" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -151,10 +159,11 @@
         <option value="$PROJECT_DIR$/SWBrowser/jQuery1.12.1Mini.js" />
         <option value="$PROJECT_DIR$/SWBrowser/jQueryTest.js" />
         <option value="$PROJECT_DIR$/SWBrowser/chisJquery.js" />
-        <option value="$PROJECT_DIR$/SWBrowser/TaoBao.js" />
         <option value="$PROJECT_DIR$/SWBrowser/jingdong.js" />
         <option value="$PROJECT_DIR$/SWBrowser/chsi.js" />
         <option value="$PROJECT_DIR$/SWBrowser/jingdongMobile.js" />
+        <option value="$PROJECT_DIR$/SWBrowser/test2.js" />
+        <option value="$PROJECT_DIR$/SWBrowser/TaoBao.js" />
       </list>
     </option>
   </component>
@@ -164,8 +173,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="52" />
-    <option name="y" value="23" />
+    <option name="x" value="20" />
+    <option name="y" value="124" />
     <option name="width" value="1260" />
     <option name="height" value="736" />
   </component>
@@ -337,15 +346,15 @@
       <workItem from="1459496543569" duration="616000" />
       <workItem from="1459497281934" duration="3218000" />
       <workItem from="1459823072340" duration="702000" />
-      <workItem from="1459908989346" duration="10466000" />
+      <workItem from="1459908989346" duration="31383000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56011000" />
+    <option name="totallyTimeSpent" value="76928000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="52" y="23" width="1260" height="736" extended-state="0" />
+    <frame x="20" y="124" width="1260" height="736" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -384,13 +393,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13305">
-          <caret line="887" column="0" selection-start-line="887" selection-start-column="0" selection-end-line="887" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SWBrowser/get12306.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -479,7 +481,7 @@
         <state relative-caret-position="480">
           <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -556,7 +558,7 @@
         <state relative-caret-position="495">
           <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -601,7 +603,7 @@
         <state relative-caret-position="495">
           <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -619,7 +621,7 @@
         <state relative-caret-position="405">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="40" selection-end-column="1" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -646,13 +648,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/E4X.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1905">
-          <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SWBrowser/jQuery1.12.1Mini.js" />
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/HTML5.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -666,7 +661,7 @@
         <state relative-caret-position="480">
           <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -675,32 +670,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="1662" column="0" selection-start-line="1662" selection-start-column="0" selection-end-line="1662" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SWBrowser/jquery-1.12.1.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="1" column="26791" selection-start-line="1" selection-start-column="26791" selection-end-line="1" selection-end-column="26791" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DOMCore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="438" column="0" selection-start-line="438" selection-start-column="0" selection-end-line="438" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -720,28 +689,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SWBrowser/jQueryTest.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc;n#loadJquery#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SWBrowser/get12306.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SWBrowser/jingdong.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -754,13 +705,73 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/E4X.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="1662" column="0" selection-start-line="1662" selection-start-column="0" selection-end-line="1662" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SWBrowser/test2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DOMCore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="539" column="0" selection-start-line="539" selection-start-column="0" selection-end-line="539" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SWBrowser/jquery-1.12.1.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="1" column="767" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SWBrowser/jQueryTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="8" selection-end-column="72" />
+          <folding>
+            <element signature="n#!!doc;n#loadJquery#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SWBrowser/jingdong.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-210">
+          <caret line="86" column="4" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SWBrowser/TaoBao.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="33" column="26" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
-          <folding>
-            <element signature="n#!!doc;n#datasToJsonString#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="210">
+          <caret line="91" column="17" selection-start-line="91" selection-start-column="17" selection-end-line="91" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>

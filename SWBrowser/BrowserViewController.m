@@ -292,13 +292,13 @@
     NSString *lJs1 = @"document.documentElement.innerHTML";
     
    
-//    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"get12306" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
-//    NSString *json = [self.webView stringByEvaluatingJavaScriptFromString:js];
-//    NSLog(@"json = %@",json);
-//    NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
-//    
-//    NSArray *infoArr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-//    
+    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"TaoBao" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
+    NSString *json = [self.webView stringByEvaluatingJavaScriptFromString:js];
+    NSLog(@"json = %@",json);
+    NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSArray *infoArr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    
     
     
     
@@ -346,6 +346,10 @@
     }
     if (!haveLoadJquery) {
      //导入jquery
+        NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"jQueryTest" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
+        NSString *json = [self.webView stringByEvaluatingJavaScriptFromString:js];
+
+        
     }
     
     
