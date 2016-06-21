@@ -8,6 +8,7 @@
 function getBase64Image() {
 
     var img = document.getElementsByTagName('img')[0];
+    img.crossOrigin = "*"
     var canvas = document.createElement("canvas");
     
     canvas.width = img.width;
@@ -15,13 +16,14 @@ function getBase64Image() {
 
     var ctx = canvas.getContext("2d");
     
-    ctx.drawImage(img, 0, 0,image.width,image.height);
+    ctx.drawImage(img, 0, 0,img.width,img.height);
 
     var dataURL = canvas.toDataURL("image/png");
-    alert(dataURL);
+//    alert(dataURL);
 
 //    return dataURL;
     return dataURL.replace(/^data:image\/(png|jpg);base64,/,"");
+
  
 }
 //getBase64Image()

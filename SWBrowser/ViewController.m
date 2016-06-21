@@ -9,8 +9,10 @@
 #import "ViewController.h"
 #import "BrowserViewController.h"
 #import "WKWebViewViewController.h"
-@interface ViewController ()
-
+#import "WebViewJavascriptBridge.h"
+@interface ViewController ()<UIWebViewDelegate>
+@property(nonatomic,strong)UIWebView *webView;
+@property WebViewJavascriptBridge* bridge;
 @end
 
 @implementation ViewController
@@ -18,21 +20,57 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 200, 375, 467)];
+    
+    [self.view addSubview:self.webView];
+    
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.qichacha.com/firm_BJ_9aa24730a5ba37a8e215d0f054ad84aa.shtml"]]];
 
-
-}
-
-- (IBAction)gotoCHSI:(id)sender {
-    WKWebViewViewController *browser = [[WKWebViewViewController alloc]init];
-    browser.defaultUrl = @"http://my.chsi.com.cn/archive/xlarchive.action";
-    browser.allowedUrls = @[@"http://order.jd.com/center/list.action",@"http://my.chsi.com.cn/archive/xlarchive.action",@"https://www.baidu.com"];
-    [self presentViewController:browser animated:YES completion:^{
+    self.webView.delegate = self;
+    
+//    [WebViewJavascriptBridge enableLogging];
+    
+    _bridge = [WebViewJavascriptBridge bridgeForWebView:self.webView];
+    
+    [_bridge registerHandler:@"getQiChaChaData" handler:^(id data, WVJBResponseCallback responseCallback) {
+        NSLog(@"testObjcCallback called: %@", data);
+        responseCallback(@"Response from testObjcCallback");
+        
+        
         
     }];
 }
+-(void)webViewDidStartLoad:(UIWebView *)webView{
+    
+
+    
+    
+    
+}
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    
+   
+    
+    
+}
+- (IBAction)gotoCHSI:(id)sender {
+//    WKWebViewViewController *browser = [[WKWebViewViewController alloc]init];
+//    browser.defaultUrl = @"http://my.chsi.com.cn/archive/xlarchive.action";
+//    browser.allowedUrls = @[@"http://order.jd.com/center/list.action",@"http://my.chsi.com.cn/archive/xlarchive.action",@"https://www.baidu.com"];
+//    [self presentViewController:browser animated:YES completion:^{
+//        
+//    }];
+    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"aa" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
+    
+    [self.webView stringByEvaluatingJavaScriptFromString:js];
+    
+    
+    
+    
+}
 - (IBAction)gotoBaidu:(id)sender {
     BrowserViewController *browser = [[BrowserViewController alloc]init];
-    browser.defaultUrl = @"https://www.baidu.com";
+    browser.defaultUrl = @"http://www.qichacha.com/firm_BJ_9aa24730a5ba37a8e215d0f054ad84aa.shtml";
     browser.allowedUrls = @[@"http://order.jd.com/center/list.action",@"http://my.chsi.com.cn/archive/xlarchive.action",@"https://www.baidu.com"];
     [self presentViewController:browser animated:YES completion:^{
         

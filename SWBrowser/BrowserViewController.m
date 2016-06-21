@@ -292,7 +292,7 @@
     NSString *lJs1 = @"document.documentElement.innerHTML";
     
    
-    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"TaoBao" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
+    NSString *js = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"aa" ofType:@"js"]] encoding:NSUTF8StringEncoding error:nil];
     NSString *json = [self.webView stringByEvaluatingJavaScriptFromString:js];
     NSLog(@"json = %@",json);
     NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
